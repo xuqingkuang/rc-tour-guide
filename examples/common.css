@@ -1,3 +1,161 @@
+.rc-tour-guide .rc-tour-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  z-index: 999999;
+  background-color: black;
+  opacity: .8;
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
+  background: radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000', endColorstr='#e6000000', GradientType=1);
+  filter: "alpha(opacity=50)";
+}
+.rc-tour-guide .rc-tour-mask {
+  border: 1px solid #777;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  z-index: 9999998;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.rc-tour-guide .rc-tour-tooltip {
+  z-index: 10000000;
+  visibility: visible;
+  width: 250px;
+  background-color: white;
+  color: #545454;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+.rc-tour-guide .rc-tour-tooltip p {
+  margin: 5px 3px;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow {
+  border: 5px solid white;
+  content: '';
+  position: absolute;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-left {
+  bottom: -10px;
+  border-top-color: white;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-center {
+  bottom: -10px;
+  left: 50%;
+  border-top-color: white;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-right {
+  bottom: -10px;
+  right: 10px;
+  border-top-color: white;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-top {
+  left: -10px;
+  top: 10px;
+  border-top-color: transparent;
+  border-right-color: white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-middle {
+  left: -10px;
+  top: 45%;
+  border-top-color: transparent;
+  border-right-color: white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-bottom {
+  left: -10px;
+  bottom: 10px;
+  border-top-color: transparent;
+  border-right-color: white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-left {
+  top: -10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-center {
+  top: -10px;
+  left: 50%;
+  margin-left: -5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-right {
+  top: -10px;
+  right: 10px;
+  margin-left: -5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  border-left-color: transparent;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-top {
+  right: -10px;
+  top: 10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: white;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-middle {
+  right: -10px;
+  top: 45%;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: white;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-bottom {
+  bottom: 10px;
+  right: -10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: white;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button {
+  color: #666;
+  background-color: white;
+  border: 1px solid #666;
+  border-radius: 4px;
+  margin: 0 2px;
+  outline: none;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button:hover {
+  border-color: #57c5f7;
+  color: #57c5f7;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button:active {
+  background-color: #57c5f7;
+  color: white;
+}
 body {
   margin: 0 2rem;
 }

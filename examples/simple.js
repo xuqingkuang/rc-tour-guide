@@ -3,12 +3,12 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(178);
+	module.exports = __webpack_require__(179);
 
 
 /***/ },
 
-/***/ 178:
+/***/ 179:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26,6 +26,8 @@ webpackJsonp([2],{
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	__webpack_require__(176); // use jsx to render html, do not modify simple.html
+	
+	__webpack_require__(177);
 	
 	var tour = {
 	  startIndex: 0,

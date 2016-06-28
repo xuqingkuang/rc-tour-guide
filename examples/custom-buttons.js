@@ -25,6 +25,8 @@ webpackJsonp([0],[
 	
 	__webpack_require__(176); // use jsx to render html, do not modify simple.html
 	
+	__webpack_require__(177);
+	
 	var tour = {
 	  startIndex: 0,
 	  scrollToSteps: true,
