@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { tourGuideMixin } from 'rc-tour-guide';
+require('rc-tour-guide/assets/index.less');
 require('./style.less');
 
 const tour = {
