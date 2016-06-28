@@ -20439,19 +20439,29 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.tourGuideMixin = undefined;
+	exports.default = undefined;
 	
 	var _src = __webpack_require__(170);
 	
-	var _src2 = _interopRequireDefault(_src);
+	Object.keys(_src).forEach(function (key) {
+	  if (key === "default") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _src[key];
+	    }
+	  });
+	});
 	
-	var _Mixin = __webpack_require__(171);
+	var _src2 = __webpack_require__(170);
+	
+	var _src3 = _interopRequireDefault(_src2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _src2.default; // export this package's api
+	exports.default = _src3.default; // export this package's api
 	
-	var tourGuideMixin = exports.tourGuideMixin = _Mixin.mixin;
+	module.exports = exports['default'];
 
 /***/ },
 /* 170 */
@@ -20465,11 +20475,14 @@
 	
 	var _Mixin = __webpack_require__(171);
 	
-	// TODO: Higher order component implementation.
+	var _Mixin2 = _interopRequireDefault(_Mixin);
 	
-	exports.default = function (options, done) {
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// TODO: Higher order component implementation.
+	var HigherOrderComponent = function HigherOrderComponent(options, done) {
 	  return function (Component) {
-	    var m = (0, _Mixin.mixin)(options, done);
+	    var m = (0, _Mixin2.default)(options, done);
 	    var descs = Object.getOwnPropertyDescriptor(m);
 	    for (var key in descs) {
 	      if (!(key in Component.prototype)) {
@@ -20480,6 +20493,9 @@
 	  };
 	};
 	
+	HigherOrderComponent.tourGuideMixin = _Mixin2.default;
+	
+	exports.default = HigherOrderComponent;
 	module.exports = exports['default'];
 
 /***/ },
@@ -20491,7 +20507,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.mixin = undefined;
 	
 	var _jquery = __webpack_require__(172);
 	
@@ -20521,9 +20536,9 @@
 	
 	__webpack_require__(176);
 	
-	var mixin = exports.mixin = function mixin(options, done) {
-	  return {
+	exports.default = function (options, done) {
 	
+	  return {
 	    options: (0, _objectAssign2.default)({
 	      startIndex: 0,
 	      scrollToSteps: true,
@@ -20809,6 +20824,8 @@
 	
 	  };
 	};
+	
+	module.exports = exports['default'];
 
 /***/ },
 /* 172 */
