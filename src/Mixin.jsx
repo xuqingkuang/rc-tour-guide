@@ -7,9 +7,9 @@ import Locale from './locale/zh_CN';
 
 require('./TourGuide.less');
 
-export const mixin = (options, done) => {
-  return {
+export default (options, done) => {
 
+  return {
     options: objectAssign({
       startIndex: 0,
       scrollToSteps: true,

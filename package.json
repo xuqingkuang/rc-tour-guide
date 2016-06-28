@@ -1,12 +1,15 @@
 {
   "name": "rc-tour-guide",
-  "version": "0.0.1",
-  "description": "tour-guide ui component for react",
+  "version": "0.0.2",
+  "description": "Tour Guide component for react",
   "keywords": [
     "react",
     "react-component",
     "react-tour-guide",
     "tour-guide",
+    "react-component",
+    "ant-design",
+    "ant.design",
     "intro",
     "introduction"
   ],
@@ -22,7 +25,7 @@
     "assets/*.css"
   ],
   "license": "MIT",
-  "main": "./index",
+  "main": "./lib/index",
   "config": {
     "port": 8000
   },

@@ -1,7 +1,7 @@
-import { mixin } from './Mixin';
+import mixin from './Mixin';
 
 // TODO: Higher order component implementation.
-export default (options, done) => {
+const HigherOrderComponent = (options, done) => {
   return (Component) => {
     const m = mixin(options, done);
     const descs = Object.getOwnPropertyDescriptor(m);
@@ -13,3 +13,7 @@ export default (options, done) => {
     return Component;
   };
 };
+
+HigherOrderComponent.tourGuideMixin = mixin;
+
+export default HigherOrderComponent;
