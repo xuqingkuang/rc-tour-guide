@@ -20656,7 +20656,7 @@
 	      }
 	      var step = this.options.steps[this.state.currentIndex];
 	      var placement = step.placement;
-	      var $target = (0, _jquery2.default)(step.element);
+	      var $target = (0, _jquery2.default)(step.selector);
 	      var targetOffset = $target.offset();
 	      var targetWidth = $target.outerWidth();
 	      var targetHeight = $target.outerHeight();
@@ -20790,7 +20790,7 @@
 	        currentStep.placement = 'bottom-left';
 	      }
 	      var maxStepIndex = this.options.steps.length - 1;
-	      var $target = currentStep && currentStep.element ? (0, _jquery2.default)(currentStep.element) : null;
+	      var $target = currentStep && currentStep.selector ? (0, _jquery2.default)(currentStep.selector) : null;
 	      var cssPosition = $target ? $target.css('position') : null;
 	      var element = void 0;
 	

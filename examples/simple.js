@@ -34,18 +34,18 @@ webpackJsonp([2],{
 	  scrollToSteps: true,
 	  steps: [{
 	    text: 'This is the first step in the tour.',
-	    element: '.block'
+	    selector: '.block'
 	  }, {
 	    text: 'This is the second step in the tour.',
-	    element: '.inline-block',
+	    selector: '.inline-block',
 	    placement: 'right-bottom'
 	  }, {
 	    text: 'This is the third step in the tour.',
-	    element: '.float-right',
+	    selector: '.float-right',
 	    placement: 'left-middle'
 	  }, {
 	    text: 'This is the fourth step in the tour.',
-	    element: '.position-absolute',
+	    selector: '.position-absolute',
 	    placement: 'top-right'
 	  }]
 	};

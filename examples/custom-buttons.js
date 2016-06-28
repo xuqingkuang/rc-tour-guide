@@ -32,7 +32,7 @@ webpackJsonp([0],[
 	  scrollToSteps: true,
 	  steps: [{
 	    text: 'Used to express a greeting, answer a telephone, or attract attention.',
-	    element: '.hello',
+	    selector: '.hello',
 	    extraButtons: [_react2.default.createElement(
 	      'button',
 	      { key: '1', onClick: function onClick() {
@@ -42,7 +42,7 @@ webpackJsonp([0],[
 	    )]
 	  }, {
 	    text: 'The class of persons devoted to the affairs, interests, or pursuits of this life.',
-	    element: '.world',
+	    selector: '.world',
 	    extraButtons: [_react2.default.createElement(
 	      'button',
 	      { key: '1', onClick: function onClick() {
