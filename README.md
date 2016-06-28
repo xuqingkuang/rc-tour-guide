@@ -38,11 +38,10 @@ online example: http://xuqingkuang.github.io/rc-tour-guide/
 ## Usage
 
 ```js
-// use jsx to render html, do not modify simple.html
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { tourGuideMixin } from 'rc-tour-guide';
+require('rc-tour-guide/assets/index.less');
 require('./style.less');
 
 const tour = {
@@ -51,21 +50,21 @@ const tour = {
   steps: [
     {
       text: 'This is the first step in the tour.',
-      element: '.block',
+      selector: '.block',
     },
     {
       text: 'This is the second step in the tour.',
-      element: '.inline-block',
+      selector: '.inline-block',
       placement: 'right-bottom'
     },
     {
       text: 'This is the third step in the tour.',
-      element: '.float-right',
+      selector: '.float-right',
       placement: 'left-middle',
     },
     {
       text: 'This is the fourth step in the tour.',
-      element: '.position-absolute',
+      selector: '.position-absolute',
       placement: 'top-right',
     }
   ]
