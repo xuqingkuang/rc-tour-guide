@@ -127,7 +127,7 @@ export default (options, done) => {
       }
       const step = this.options.steps[this.state.currentIndex];
       const placement = step.placement;
-      const $target = $(step.element);
+      const $target = $(step.selector);
       const targetOffset = $target.offset();
       const targetWidth = $target.outerWidth();
       const targetHeight = $target.outerHeight();
@@ -257,7 +257,7 @@ export default (options, done) => {
         currentStep.placement = 'bottom-left';
       }
       const maxStepIndex = this.options.steps.length - 1;
-      const $target = currentStep && currentStep.element ? $(currentStep.element) : null;
+      const $target = currentStep && currentStep.selector ? $(currentStep.selector) : null;
       const cssPosition = $target ? $target.css('position') : null;
       let element;
 

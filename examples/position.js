@@ -12,66 +12,66 @@ const tour = {
   steps: [
     {
       text: 'Tooltip 1, as same as bottom-left',
-      element: '.no-placement',
+      selector: '.no-placement',
     },
     {
       text: 'Tooltip 2',
-      element: '.position1',
+      selector: '.position1',
       placement: 'top-left',
     },
     {
       text: 'Tooltip 3',
-      element: '.position2',
+      selector: '.position2',
       placement: 'top-center',
     },
     {
       text: 'Tooltip 4',
-      element: '.position3',
+      selector: '.position3',
       placement: 'top-right',
     },
     {
       text: 'Tooltip 5',
-      element: '.position6',
+      selector: '.position6',
       placement: 'right-top',
     },
     {
       text: 'Tooltip 6',
-      element: '.position8',
+      selector: '.position8',
       placement: 'right-middle',
     },
     {
       text: 'Tooltip 7',
-      element: '.position10',
+      selector: '.position10',
       placement: 'right-bottom',
     },
     {
       text: 'Tooltip 8',
-      element: '.position13',
+      selector: '.position13',
       placement: 'bottom-right',
     },
     {
       text: 'Tooltip 9',
-      element: '.position12',
+      selector: '.position12',
       placement: 'bottom-center',
     },
     {
       text: 'Tooltip 10',
-      element: '.position11',
+      selector: '.position11',
       placement: 'bottom-left',
     },
     {
       text: 'Tooltip 11',
-      element: '.position9',
+      selector: '.position9',
       placement: 'left-bottom',
     },
     {
       text: 'Tooltip 12',
-      element: '.position7',
+      selector: '.position7',
       placement: 'left-middle',
     },
     {
       text: 'Tooltip 13',
-      element: '.position4',
+      selector: '.position4',
       placement: 'left-top',
     },
   ]

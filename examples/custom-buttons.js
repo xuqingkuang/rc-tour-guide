@@ -12,14 +12,14 @@ const tour = {
   steps: [
     {
       text: 'Used to express a greeting, answer a telephone, or attract attention.',
-      element: '.hello',
+      selector: '.hello',
       extraButtons: [
         (<button key="1" onClick={function() { alert("hello") }}>say</button>)
       ],
     },
     {
       text: 'The class of persons devoted to the affairs, interests, or pursuits of this life.',
-      element: '.world',
+      selector: '.world',
       extraButtons: [
         (<button key="1" onClick={function() { alert("world") }}>say</button>)
       ],
