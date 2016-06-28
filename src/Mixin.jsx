@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Tooltip from './Tooltip';
 import Locale from './locale/zh_CN';
 
-require('./TourGuide.less');
+require('../assets/index.less');
 
 export default (options, done) => {
 
