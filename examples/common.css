@@ -156,6 +156,14 @@
   background-color: #57c5f7;
   color: white;
 }
+.rc-tour-guide-target,
+tr.rc-tour-guide-target > th,
+tr.rc-tour-guide-target > td {
+  z-index: 9999999 !important;
+}
+.rc-tour-guide-relative {
+  position: relative;
+}
 body {
   margin: 0 2rem;
 }

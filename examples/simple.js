@@ -54,10 +54,14 @@ webpackJsonp([2],{
 	  console.log('User has completed tour!');
 	};
 	
+	var cancel = function cancel() {
+	  console.log('User has canceled the tour!');
+	};
+	
 	var TourGuide = _react2.default.createClass({
 	  displayName: 'TourGuide',
 	
-	  mixins: [(0, _rcTourGuide.tourGuideMixin)(tour, cb)],
+	  mixins: [(0, _rcTourGuide.tourGuideMixin)(tour, cb, cancel)],
 	  componentDidMount: function componentDidMount() {
 	    this.showTourGuide();
 	  },

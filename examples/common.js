@@ -20534,7 +20534,16 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (options, done) {
+	var targetClassName = 'rc-tour-guide-target rc-tour-guide-relative';
+	
+	exports.default = function (options, done, cancel) {
+	
+	  if (!done) {
+	    done = function done() {};
+	  }
+	  if (!cancel) {
+	    cancel = function cancel() {};
+	  }
 	
 	  return {
 	    options: (0, _objectAssign2.default)({
@@ -20543,8 +20552,6 @@
 	      steps: [],
 	      locale: _zh_CN2.default
 	    }, options),
-	
-	    completionCallback: done || function () {},
 	
 	    getInitialState: function getInitialState() {
 	      return {
@@ -20587,7 +20594,6 @@
 	      if (hasNewIndex && hasNewStep || didToggleTooltip || hasNewX || hasNewY) {
 	        this._renderLayer();
 	      } else if (hasSteps && hasNewIndex && !hasNewStep) {
-	        this.completionCallback();
 	        this._unrenderLayer();
 	      }
 	    },
@@ -20741,6 +20747,7 @@
 	      if (reset) {
 	        currentIndex = this.options.startIndex;
 	      }
+	      this.processTarget(currentIndex);
 	      this.setState({
 	        show: true,
 	        currentIndex: currentIndex
@@ -20749,29 +20756,54 @@
 	
 	    hideTourGuide: function hideTourGuide(evt) {
 	      var reset = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+	      var callback = arguments[2];
 	
 	      var currentIndex = this.state.currentIndex;
 	      if (reset) {
 	        currentIndex = this.options.startIndex;
 	      }
+	      (0, _jquery2.default)(targetClassName).removeClass(targetClassName);
 	      this.setState({
 	        show: false,
 	        currentIndex: currentIndex
 	      }, this._renderLayer);
+	      if (typeof callback === 'function') {
+	        callback();
+	      }
 	    },
 	
 	    previousTooltip: function previousTooltip(evt) {
-	      this.setState({
-	        show: true,
-	        currentIndex: this.state.currentIndex - 1
-	      }, this.scrollToNextStep);
+	      var previousIndex = this.state.currentIndex;
+	      var currentIndex = previousIndex - 1;
+	      this.processPreviousElement(previousIndex);
+	      this.processTarget(currentIndex);
+	      this.setState({ show: true, currentIndex: currentIndex }, this.scrollToNextStep);
 	    },
 	
 	    nextTooltip: function nextTooltip(evt) {
-	      this.setState({
-	        show: true,
-	        currentIndex: this.state.currentIndex + 1
-	      }, this.scrollToNextStep);
+	      var previousIndex = this.state.currentIndex;
+	      var currentIndex = previousIndex + 1;
+	      this.processPreviousElement(previousIndex);
+	      this.processTarget(currentIndex);
+	      this.setState({ show: true, currentIndex: currentIndex }, this.scrollToNextStep);
+	    },
+	
+	    processTarget: function processTarget(index) {
+	      var step = this.options.steps[index];
+	      var $target = step && step.selector ? (0, _jquery2.default)(step.selector) : null;
+	      if (!$target) {
+	        return;
+	      }
+	      $target.addClass(targetClassName);
+	    },
+	
+	    processPreviousElement: function processPreviousElement(index) {
+	      var step = this.options.steps[index];
+	      var $target = step && step.selector ? (0, _jquery2.default)(step.selector) : null;
+	      if (!$target) {
+	        return;
+	      }
+	      $target.removeClass(targetClassName);
 	    },
 	
 	    scrollToNextStep: function scrollToNextStep() {
@@ -20782,6 +20814,14 @@
 	          'scrollTop': $next.offset().top - (0, _jquery2.default)(window).height() / 2
 	        }, 500);
 	      }
+	    },
+	
+	    handleDone: function handleDone(evt) {
+	      this.hideTourGuide(evt, false, done);
+	    },
+	
+	    handleCancel: function handleCancel(evt) {
+	      this.hideTourGuide(evt, false, cancel);
 	    },
 	
 	    renderCurrentStep: function renderCurrentStep() {
@@ -20810,7 +20850,12 @@
 	          hideTourGuide: this.hideTourGuide,
 	          onPrevious: this.previousTooltip,
 	          onNext: this.nextTooltip,
-	          onDone: this.hideTourGuide,
+	          onDone: function (evt) {
+	            this.handleDone(evt);
+	          }.bind(this),
+	          onCancel: function (evt) {
+	            this.handleCancel(evt);
+	          }.bind(this),
 	          locale: this.options.locale
 	        });
 	      } else {
@@ -30963,6 +31008,7 @@
 	    var targetHeight = _props2.targetHeight;
 	    var text = _props2.text;
 	    var onDone = _props2.onDone;
+	    var onCancel = _props2.onCancel;
 	
 	
 	    var maskStyles = {
@@ -30984,7 +31030,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'rc-tour-guide' },
-	      _react2.default.createElement('div', { className: 'rc-tour-backdrop', onClick: onDone }),
+	      _react2.default.createElement('div', { className: 'rc-tour-backdrop', onClick: onCancel }),
 	      _react2.default.createElement('div', { className: 'rc-tour-mask', style: maskStyles }),
 	      _react2.default.createElement(
 	        'div',
