@@ -5,7 +5,16 @@ import ReactDOM from 'react-dom';
 import Tooltip from './Tooltip';
 import Locale from './locale/zh_CN';
 
-export default (options, done) => {
+const targetClassName = 'rc-tour-guide-target rc-tour-guide-relative';
+
+export default (options, done, cancel) => {
+
+  if (!done) {
+    done = () => {};
+  }
+  if (!cancel) {
+    cancel = () => {};
+  }
 
   return {
     options: objectAssign({
@@ -14,8 +23,6 @@ export default (options, done) => {
       steps: [],
       locale: Locale,
     }, options),
-
-    completionCallback: done || function () {},
 
     getInitialState: function () {
       return {
@@ -58,7 +65,6 @@ export default (options, done) => {
       if ( (hasNewIndex && hasNewStep) || didToggleTooltip || hasNewX || hasNewY ) {
         this._renderLayer();
       } else if ( hasSteps && hasNewIndex && !hasNewStep ) {
-        this.completionCallback();
         this._unrenderLayer();
       }
     },
@@ -210,35 +216,61 @@ export default (options, done) => {
       if (reset) {
         currentIndex = this.options.startIndex
       }
+      this.processTarget(currentIndex);
       this.setState({
         show: true,
         currentIndex: currentIndex,
       });
     },
 
-    hideTourGuide: function (evt, reset = false) {
+    hideTourGuide: function (evt, reset = false, callback) {
       let currentIndex = this.state.currentIndex;
       if (reset) {
         currentIndex = this.options.startIndex
       }
+      $(targetClassName)
+        .removeClass(targetClassName)
       this.setState({
         show: false,
         currentIndex: currentIndex,
       }, this._renderLayer);
+      if (typeof callback === 'function') {
+        callback();
+      }
     },
 
     previousTooltip: function (evt) {
-      this.setState({
-        show: true,
-        currentIndex: this.state.currentIndex - 1
-      }, this.scrollToNextStep);
+      const previousIndex = this.state.currentIndex;
+      const currentIndex = previousIndex - 1;
+      this.processPreviousElement(previousIndex);
+      this.processTarget(currentIndex);
+      this.setState({ show: true, currentIndex }, this.scrollToNextStep);
     },
 
     nextTooltip: function (evt) {
-      this.setState({
-        show: true,
-        currentIndex: this.state.currentIndex + 1
-      }, this.scrollToNextStep);
+      const previousIndex = this.state.currentIndex;
+      const currentIndex = previousIndex + 1;
+      this.processPreviousElement(previousIndex);
+      this.processTarget(currentIndex);
+      this.setState({ show: true, currentIndex }, this.scrollToNextStep);
+    },
+
+    processTarget: function(index) {
+      const step = this.options.steps[index];
+      const $target = step && step.selector ? $(step.selector) : null;
+      if (!$target) {
+        return
+      }
+      $target.addClass(targetClassName);
+    },
+
+    processPreviousElement: function(index) {
+      const step = this.options.steps[index];
+      const $target = step && step.selector ? $(step.selector) : null;
+      if (!$target) {
+        return
+      }
+      $target.removeClass(targetClassName);
     },
 
     scrollToNextStep: function () {
@@ -249,6 +281,14 @@ export default (options, done) => {
           'scrollTop': $next.offset().top - $(window).height()/2
         }, 500);
       }
+    },
+
+    handleDone: function (evt) {
+      this.hideTourGuide(evt, false, done);
+    },
+
+    handleCancel: function (evt) {
+      this.hideTourGuide(evt, false, cancel);
     },
 
     renderCurrentStep: function () {
@@ -264,7 +304,7 @@ export default (options, done) => {
       if ( this.state.show && $target && $target.length) {
         element = (
           <Tooltip cssPosition={ cssPosition }
-            placement={currentStep.placement.toLowerCase()}
+            placement={ currentStep.placement.toLowerCase() }
             xPos={ this.state.xPos }
             yPos={ this.state.yPos }
             targetXPos={ this.state.targetXPos }
@@ -278,7 +318,8 @@ export default (options, done) => {
             hideTourGuide= { this.hideTourGuide }
             onPrevious={ this.previousTooltip }
             onNext={ this.nextTooltip }
-            onDone={ this.hideTourGuide }
+            onDone={ function(evt) { this.handleDone(evt); }.bind(this) }
+            onCancel={ function(evt) { this.handleCancel(evt); }.bind(this) }
             locale={ this.options.locale }
           />
         );

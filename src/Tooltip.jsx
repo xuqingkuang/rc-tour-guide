@@ -124,6 +124,7 @@ export default class Tooltip extends Component {
       targetHeight,
       text,
       onDone,
+      onCancel,
     } = this.props;
 
     const maskStyles = {
@@ -144,7 +145,7 @@ export default class Tooltip extends Component {
 
     return (
       <div className="rc-tour-guide">
-        <div className="rc-tour-backdrop" onClick={onDone} />
+        <div className="rc-tour-backdrop" onClick={onCancel} />
         <div className="rc-tour-mask" style={maskStyles}></div>
         <div className="rc-tour-tooltip" style={toolTipStyles}>
           <p>{text || ''}</p>

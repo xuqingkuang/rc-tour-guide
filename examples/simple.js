@@ -36,8 +36,12 @@ const cb = function() {
   console.log('User has completed tour!');
 };
 
+const cancel = function() {
+  console.log('User has canceled the tour!');
+}
+
 const TourGuide = React.createClass({
-  mixins: [ tourGuideMixin(tour, cb) ],
+  mixins: [ tourGuideMixin(tour, cb, cancel) ],
   componentDidMount: function() {
     this.showTourGuide();
   },
