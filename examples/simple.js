@@ -27,16 +27,28 @@ const tour = {
     {
       text: 'This is the fourth step in the tour.',
       selector: '.position-absolute',
-      placement: 'top-right',
+      placement: 'bottom-right',
+    },
+    {
+      text: 'This is the fifth step in the tour.',
+      selector: '.position-fixed',
+      beCurrent: function($target) {
+        $target.addClass('red');
+      },
+      bePrevious: function($target) {
+        $target.removeClass('red');
+      }
     }
   ]
 };
 
 const cb = function() {
+  console.log(this);
   console.log('User has completed tour!');
 };
 
 const cancel = function() {
+  console.log(this);
   console.log('User has canceled the tour!');
 }
 
@@ -69,6 +81,9 @@ const TourGuide = React.createClass({
         </div>
         <div className="position-absolute">
           I am the position absolute text.
+        </div>
+        <div className="position-fixed">
+          I am the position fixed text.
         </div>
       </div>
     )

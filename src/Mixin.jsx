@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom';
 import Tooltip from './Tooltip';
 import Locale from './locale/zh_CN';
 
-const targetClassName = 'rc-tour-guide-target rc-tour-guide-relative';
-
 export default (options, done, cancel) => {
 
   if (!done) {
@@ -22,6 +20,10 @@ export default (options, done, cancel) => {
       scrollToSteps: true,
       steps: [],
       locale: Locale,
+      classNames: {
+        target: 'rc-tour-guide-target',
+        position: 'rc-tour-guide-relative',
+      }
     }, options),
 
     getInitialState: function () {
@@ -216,7 +218,7 @@ export default (options, done, cancel) => {
       if (reset) {
         currentIndex = this.options.startIndex
       }
-      this.processTarget(currentIndex);
+      this.currentTarget(currentIndex);
       this.setState({
         show: true,
         currentIndex: currentIndex,
@@ -225,52 +227,82 @@ export default (options, done, cancel) => {
 
     hideTourGuide: function (evt, reset = false, callback) {
       let currentIndex = this.state.currentIndex;
+      this.previousTarget(currentIndex);
+      // Reset currentIndex
       if (reset) {
         currentIndex = this.options.startIndex
       }
-      $(targetClassName)
-        .removeClass(targetClassName)
       this.setState({
         show: false,
         currentIndex: currentIndex,
       }, this._renderLayer);
       if (typeof callback === 'function') {
-        callback();
+        callback.call(this);
       }
     },
 
     previousTooltip: function (evt) {
       const previousIndex = this.state.currentIndex;
       const currentIndex = previousIndex - 1;
-      this.processPreviousElement(previousIndex);
-      this.processTarget(currentIndex);
+      this.previousTarget(previousIndex);
+      this.currentTarget(currentIndex);
       this.setState({ show: true, currentIndex }, this.scrollToNextStep);
     },
 
     nextTooltip: function (evt) {
       const previousIndex = this.state.currentIndex;
       const currentIndex = previousIndex + 1;
-      this.processPreviousElement(previousIndex);
-      this.processTarget(currentIndex);
+      this.previousTarget(previousIndex);
+      this.currentTarget(currentIndex);
       this.setState({ show: true, currentIndex }, this.scrollToNextStep);
     },
 
-    processTarget: function(index) {
-      const step = this.options.steps[index];
-      const $target = step && step.selector ? $(step.selector) : null;
-      if (!$target) {
-        return
-      }
-      $target.addClass(targetClassName);
+    getClassNames: function(names, step) {
+      return names.map((name) => {
+        let className = this.options.classNames[name];
+        if (!step) {
+          return className
+        }
+        if (step.classNames && step.classNames[name]) {
+          className = step.classNames[name];
+        }
+        return className
+      })
     },
 
-    processPreviousElement: function(index) {
+    currentTarget: function(index) {
       const step = this.options.steps[index];
       const $target = step && step.selector ? $(step.selector) : null;
       if (!$target) {
         return
       }
-      $target.removeClass(targetClassName);
+      // Added identified target
+      const noPositionClassNames = ['fixed', 'relative', 'absolute'];
+      const needClass = (() => {
+        if (noPositionClassNames.indexOf($target.css('position')) < 0) {
+          return ['target', 'position']
+        };
+        return ['target']
+      })();
+      const classNames  = this.getClassNames(needClass, step);
+      $target.addClass(classNames.join(' '));
+      if (typeof step.beCurrent === 'function') {
+        step.beCurrent.call(this, $target);
+      }
+    },
+
+    previousTarget: function(index) {
+      const step = this.options.steps[index];
+      const $target = step && step.selector ? $(step.selector) : null;
+      if (!$target) {
+        return
+      }
+      // Added identified target
+      const classNames = this.getClassNames(['target', 'position'], step);
+      $target.removeClass(classNames.join(' '));
+      if (typeof step.bePrevious === 'function') {
+        step.bePrevious.call(this, $target);
+      }
     },
 
     scrollToNextStep: function () {
@@ -315,7 +347,7 @@ export default (options, done, cancel) => {
             extraButtons = { currentStep.extraButtons }
             isFirst={ this.state.currentIndex === 0 }
             isLast={ this.state.currentIndex === maxStepIndex }
-            hideTourGuide= { this.hideTourGuide }
+            hideTourGuide={ function(evt) { this.handleCancel(evt).bind(this); } }
             onPrevious={ this.previousTooltip }
             onNext={ this.nextTooltip }
             onDone={ function(evt) { this.handleDone(evt); }.bind(this) }
