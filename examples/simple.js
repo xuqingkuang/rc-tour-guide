@@ -38,7 +38,8 @@ webpackJsonp([4],{
 	  }, {
 	    text: 'This is the second step in the tour.',
 	    selector: '.inline-block',
-	    placement: 'right-bottom'
+	    placement: 'right-bottom',
+	    enableCloseButton: false
 	  }, {
 	    text: 'This is the third step in the tour.',
 	    selector: '.float-right',
