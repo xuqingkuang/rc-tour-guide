@@ -1,5 +1,16 @@
 import React from 'react';
 
+export const CloseButton = ({ locale, onClick }) => {
+  return (
+    <button
+      className="tour-close-btn"
+      onClick={onClick}
+    >
+      {locale.close}
+    </button>
+  );
+};
+
 export const PreviousButton = ({ locale, onClick }) => {
   return (
     <button

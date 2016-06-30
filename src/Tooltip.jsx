@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { PreviousButton, NextButton, DoneButton } from './Buttons';
+import { CloseButton, PreviousButton, NextButton, DoneButton } from './Buttons';
 
 export default class Tooltip extends Component {
 
@@ -57,7 +57,16 @@ export default class Tooltip extends Component {
       onPrevious,
       onNext,
       onDone,
+      onClose,
+      enableCloseButton,
     } = this.props;
+
+    const closeButton = (
+    <CloseButton
+      key="close"
+      locale={locale}
+      onClick={onClose} />
+    )
 
     const previousButton = (
       <PreviousButton
@@ -100,11 +109,13 @@ export default class Tooltip extends Component {
         doneButton,
       ];
     }
-    
+    if (enableCloseButton) {
+      buttons.unshift(closeButton);
+    }
     if (Array.isArray(extraButtons)) {
       buttons = buttons.concat(extraButtons);
     }
-
+    console.log(buttons);
     return (
       <div className="rc-tour-buttons">
         {buttons}

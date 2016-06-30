@@ -23,6 +23,7 @@ export default (options, done, cancel) => {
       startIndex: 0,
       scrollToSteps: true,
       locale: Locale,
+      enableCloseButton: true,
       steps: [],
       classNames: {
         target: 'rc-tour-guide-target',
@@ -361,7 +362,9 @@ export default (options, done, cancel) => {
             onPrevious={ this.previousTooltip }
             onNext={ this.nextTooltip }
             onDone={ function(evt) { this.handleDone(evt); }.bind(this) }
+            onClose={ function(evt) { this.handleCancel(evt); }.bind(this) }
             onCancel={ function(evt) { this.handleCancel(evt); }.bind(this) }
+            enableCloseButton={ this.getStepOption(currentStep, 'enableCloseButton') }
             locale={ this.options.locale }
           />
         );
