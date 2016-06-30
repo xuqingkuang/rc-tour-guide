@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - rc-tour-guide@0.0.8</title>
+  <title>locale.js - example - rc-tour-guide@0.0.8</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -272,54 +272,91 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-tour-guide/assets/index.css'</span>);
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);
 
+<span class="hljs-comment">/* Defined the button texts */</span>
+<span class="hljs-keyword">const</span> locale = {
+  next: <span class="hljs-string">'Next'</span>,
+  previous: <span class="hljs-string">'Previous'</span>,
+  done: <span class="hljs-string">'Done'</span>
+}
+
 <span class="hljs-keyword">const</span> tour = {
+  locale,
   startIndex: <span class="hljs-number">0</span>,
   scrollToSteps: <span class="hljs-literal">true</span>,
   steps: [
     {
-      text: <span class="hljs-string">'This is the first step in the tour.'</span>,
-      selector: <span class="hljs-string">'.block'</span>,
+      text: <span class="hljs-string">'Tooltip 1, as same as bottom-left'</span>,
+      selector: <span class="hljs-string">'.no-placement'</span>,
     },
     {
-      text: <span class="hljs-string">'This is the second step in the tour.'</span>,
-      selector: <span class="hljs-string">'.inline-block'</span>,
-      placement: <span class="hljs-string">'right-bottom'</span>
+      text: <span class="hljs-string">'Tooltip 2'</span>,
+      selector: <span class="hljs-string">'.position1'</span>,
+      placement: <span class="hljs-string">'top-left'</span>,
     },
     {
-      text: <span class="hljs-string">'This is the third step in the tour.'</span>,
-      selector: <span class="hljs-string">'.float-right'</span>,
-      placement: <span class="hljs-string">'left-middle'</span>,
+      text: <span class="hljs-string">'Tooltip 3'</span>,
+      selector: <span class="hljs-string">'.position2'</span>,
+      placement: <span class="hljs-string">'top-center'</span>,
     },
     {
-      text: <span class="hljs-string">'This is the fourth step in the tour.'</span>,
-      selector: <span class="hljs-string">'.position-absolute'</span>,
+      text: <span class="hljs-string">'Tooltip 4'</span>,
+      selector: <span class="hljs-string">'.position3'</span>,
+      placement: <span class="hljs-string">'top-right'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 5'</span>,
+      selector: <span class="hljs-string">'.position6'</span>,
+      placement: <span class="hljs-string">'right-top'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 6'</span>,
+      selector: <span class="hljs-string">'.position8'</span>,
+      placement: <span class="hljs-string">'right-middle'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 7'</span>,
+      selector: <span class="hljs-string">'.position10'</span>,
+      placement: <span class="hljs-string">'right-bottom'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 8'</span>,
+      selector: <span class="hljs-string">'.position13'</span>,
       placement: <span class="hljs-string">'bottom-right'</span>,
     },
     {
-      text: <span class="hljs-string">'This is the fifth step in the tour.'</span>,
-      selector: <span class="hljs-string">'.position-fixed'</span>,
-      beCurrent: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
-        $target.addClass(<span class="hljs-string">'red'</span>);
-      },
-      bePrevious: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
-        $target.removeClass(<span class="hljs-string">'red'</span>);
-      }
-    }
+      text: <span class="hljs-string">'Tooltip 9'</span>,
+      selector: <span class="hljs-string">'.position12'</span>,
+      placement: <span class="hljs-string">'bottom-center'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 10'</span>,
+      selector: <span class="hljs-string">'.position11'</span>,
+      placement: <span class="hljs-string">'bottom-left'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 11'</span>,
+      selector: <span class="hljs-string">'.position9'</span>,
+      placement: <span class="hljs-string">'left-bottom'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 12'</span>,
+      selector: <span class="hljs-string">'.position7'</span>,
+      placement: <span class="hljs-string">'left-middle'</span>,
+    },
+    {
+      text: <span class="hljs-string">'Tooltip 13'</span>,
+      selector: <span class="hljs-string">'.position4'</span>,
+      placement: <span class="hljs-string">'left-top'</span>,
+    },
   ]
 };
 
 <span class="hljs-keyword">const</span> cb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has completed tour!'</span>);
 };
 
-<span class="hljs-keyword">const</span> cancel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has canceled the tour!'</span>);
-}
-
 <span class="hljs-keyword">const</span> TourGuide = React.createClass({
-  mixins: [ tourGuideMixin(tour, cb, cancel) ],
+  mixins: [ tourGuideMixin(tour, cb) ],
   componentDidMount: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">this</span>.showTourGuide();
   },
@@ -334,23 +371,35 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
             Reset and Show Tour Guide
           <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"block"</span>&gt;</span>
-          I am a block text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"inline-block"</span>&gt;</span>
-            I am a inline-block text
-          <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"float-right"</span>&gt;</span>
-          I am float right text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-absolute"</span>&gt;</span>
-          I am the position absolute text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-fixed"</span>&gt;</span>
-          I am the position fixed text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-table"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position1"</span>&gt;</span>top-left<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position2"</span>&gt;</span>top-center<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position3"</span>&gt;</span>top-right<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position4"</span>&gt;</span>left-top<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position5"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position6"</span>&gt;</span>right-top<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position7"</span>&gt;</span>left-middle<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"no-placement"</span>&gt;</span>No placment<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position8"</span>&gt;</span>right-middle<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position9"</span>&gt;</span>left-bottom<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position10"</span>&gt;</span>right-bottom<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position11"</span>&gt;</span>bottom-left<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position12"</span>&gt;</span>bottom-center<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position13"</span>&gt;</span>bottom-right<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>
   }
@@ -367,7 +416,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
   </a>
   
   <script src="common.js?nowrap"></script>
-  <script src="simple.js?nowrap"></script>
+  <script src="locale.js?nowrap"></script>
 </body>
 
 </html>

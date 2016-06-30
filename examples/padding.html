@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - rc-tour-guide@0.0.8</title>
+  <title>padding.js - example - rc-tour-guide@0.0.8</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -273,38 +273,27 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);
 
 <span class="hljs-keyword">const</span> tour = {
-  startIndex: <span class="hljs-number">0</span>,
-  scrollToSteps: <span class="hljs-literal">true</span>,
+  placement: <span class="hljs-string">'bottom-right'</span>,
   steps: [
     {
-      text: <span class="hljs-string">'This is the first step in the tour.'</span>,
-      selector: <span class="hljs-string">'.block'</span>,
+      text: <span class="hljs-string">'I have 2px padding'</span>,
+      selector: <span class="hljs-string">'.padding-1px'</span>,
     },
     {
-      text: <span class="hljs-string">'This is the second step in the tour.'</span>,
-      selector: <span class="hljs-string">'.inline-block'</span>,
-      placement: <span class="hljs-string">'right-bottom'</span>
+      text: <span class="hljs-string">'I have 4px padding'</span>,
+      selector: <span class="hljs-string">'.padding-3px'</span>,
+      maskPadding: <span class="hljs-number">4</span>,
     },
     {
-      text: <span class="hljs-string">'This is the third step in the tour.'</span>,
-      selector: <span class="hljs-string">'.float-right'</span>,
-      placement: <span class="hljs-string">'left-middle'</span>,
+      text: <span class="hljs-string">'I have 6px padding'</span>,
+      selector: <span class="hljs-string">'.padding-5px'</span>,
+      maskPadding: <span class="hljs-number">6</span>,
     },
     {
-      text: <span class="hljs-string">'This is the fourth step in the tour.'</span>,
-      selector: <span class="hljs-string">'.position-absolute'</span>,
-      placement: <span class="hljs-string">'bottom-right'</span>,
+      text: <span class="hljs-string">'I have 10px padding'</span>,
+      selector: <span class="hljs-string">'.padding-10px'</span>,
+      maskPadding: <span class="hljs-number">10</span>,
     },
-    {
-      text: <span class="hljs-string">'This is the fifth step in the tour.'</span>,
-      selector: <span class="hljs-string">'.position-fixed'</span>,
-      beCurrent: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
-        $target.addClass(<span class="hljs-string">'red'</span>);
-      },
-      bePrevious: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
-        $target.removeClass(<span class="hljs-string">'red'</span>);
-      }
-    }
   ]
 };
 
@@ -326,31 +315,24 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   render: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.showTourGuide}</span>&gt;</span>
-            Show Tour Guide
-          <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{function(evt)</span> { <span class="hljs-attribute">this.showTourGuide</span>(<span class="hljs-attribute">evt</span>, <span class="hljs-attribute">true</span>) }<span class="hljs-attribute">.bind</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
-            Reset and Show Tour Guide
-          <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"block"</span>&gt;</span>
-          I am a block text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"inline-block"</span>&gt;</span>
-            I am a inline-block text
-          <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"float-right"</span>&gt;</span>
-          I am float right text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-absolute"</span>&gt;</span>
-          I am the position absolute text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-fixed"</span>&gt;</span>
-          I am the position fixed text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-1px"</span>&gt;</span>
+                Default 2px padding
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-3px"</span>&gt;</span>
+                Step defined 4px padding
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-5px"</span>&gt;</span>
+                Step defined 6px padding
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-10px"</span>&gt;</span>
+                Step defined 10px padding
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>
   }
@@ -367,7 +349,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
   </a>
   
   <script src="common.js?nowrap"></script>
-  <script src="simple.js?nowrap"></script>
+  <script src="padding.js?nowrap"></script>
 </body>
 
 </html>

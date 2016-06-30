@@ -1,14 +1,14 @@
-webpackJsonp([2],{
+webpackJsonp([4],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(179);
+	module.exports = __webpack_require__(181);
 
 
 /***/ },
 
-/***/ 179:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -46,15 +46,26 @@ webpackJsonp([2],{
 	  }, {
 	    text: 'This is the fourth step in the tour.',
 	    selector: '.position-absolute',
-	    placement: 'top-right'
+	    placement: 'bottom-right'
+	  }, {
+	    text: 'This is the fifth step in the tour.',
+	    selector: '.position-fixed',
+	    beCurrent: function beCurrent($target) {
+	      $target.addClass('red');
+	    },
+	    bePrevious: function bePrevious($target) {
+	      $target.removeClass('red');
+	    }
 	  }]
 	};
 	
 	var cb = function cb() {
+	  console.log(this);
 	  console.log('User has completed tour!');
 	};
 	
 	var cancel = function cancel() {
+	  console.log(this);
 	  console.log('User has canceled the tour!');
 	};
 	
@@ -108,6 +119,11 @@ webpackJsonp([2],{
 	        'div',
 	        { className: 'position-absolute' },
 	        'I am the position absolute text.'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'position-fixed' },
+	        'I am the position fixed text.'
 	      )
 	    );
 	  }

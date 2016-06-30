@@ -51,7 +51,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		3:0
+/******/ 		5:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -97,7 +97,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"custom-buttons","1":"position","2":"simple"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"custom-buttons","1":"locale","2":"padding","3":"position","4":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -20453,13 +20453,11 @@
 	  });
 	});
 	
-	var _src2 = __webpack_require__(170);
-	
-	var _src3 = _interopRequireDefault(_src2);
+	var _src2 = _interopRequireDefault(_src);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _src3.default; // export this package's api
+	exports.default = _src2.default; // export this package's api
 	
 	module.exports = exports['default'];
 
@@ -20534,8 +20532,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var targetClassName = 'rc-tour-guide-target rc-tour-guide-relative';
-	
 	exports.default = function (options, done, cancel) {
 	
 	  if (!done) {
@@ -20547,10 +20543,19 @@
 	
 	  return {
 	    options: (0, _objectAssign2.default)({
+	      placement: 'bottom-left',
+	      maskPadding: 2,
+	      toolTipTopOffset: 2,
+	      toolTipLeftOffset: 2,
 	      startIndex: 0,
 	      scrollToSteps: true,
+	      locale: _zh_CN2.default,
+	      enableCloseButton: true,
 	      steps: [],
-	      locale: _zh_CN2.default
+	      classNames: {
+	        target: 'rc-tour-guide-target',
+	        position: 'rc-tour-guide-relative'
+	      }
 	    }, options),
 	
 	    getInitialState: function getInitialState() {
@@ -20661,7 +20666,10 @@
 	        return;
 	      }
 	      var step = this.options.steps[this.state.currentIndex];
-	      var placement = step.placement;
+	      var maskPadding = this.getStepOption(step, 'maskPadding');
+	      var toolTipTopOffset = this.getStepOption(step, 'toolTipTopOffset') + maskPadding;
+	      var toolTipLeftOffset = this.getStepOption(step, 'toolTipLeftOffset') + maskPadding;
+	      var placement = this.getStepOption(step, 'placement');
 	      var $target = (0, _jquery2.default)(step.selector);
 	      var targetOffset = $target.offset();
 	      var targetWidth = $target.outerWidth();
@@ -20672,59 +20680,55 @@
 	      var position = { x: -1000, y: -1000 };
 	
 	      // Calculate x position
-	      switch (step.placement) {
+	      switch (placement) {
 	        case 'top-left':
-	          position.x = targetOffset.left;
-	          position.y = targetOffset.top - elHeight;
+	          position.x = targetOffset.left - toolTipLeftOffset;
+	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
 	          break;
 	        case 'top-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top - elHeight;
+	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
 	          break;
 	        case 'top-right':
-	          position.x = targetOffset.left + targetWidth - elWidth;
-	          position.y = targetOffset.top - elHeight;
+	          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
+	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
 	          break;
 	        case 'right-top':
-	          position.x = targetOffset.left + targetWidth;
-	          position.y = targetOffset.top;
+	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
+	          position.y = targetOffset.top - toolTipTopOffset;
 	          break;
 	        case 'right-middle':
-	          position.x = targetOffset.left + targetWidth;
+	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'right-bottom':
-	          position.x = targetOffset.left + targetWidth;
-	          position.y = targetOffset.top + targetHeight - elHeight;
+	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
+	          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
 	          break;
 	        case 'bottom-right':
-	          position.x = targetOffset.left + targetWidth - elWidth;
-	          position.y = targetOffset.top + targetHeight;
+	          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
+	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
 	          break;
 	        case 'bottom-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top + targetHeight;
+	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
 	          break;
 	        case 'bottom-left':
-	          position.x = targetOffset.left;
-	          position.y = targetOffset.top + targetHeight;
+	          position.x = targetOffset.left - toolTipLeftOffset;
+	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
 	          break;
 	        case 'left-bottom':
-	          position.x = targetOffset.left - elWidth;
-	          position.y = targetOffset.top + targetHeight - elHeight;
+	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
+	          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
 	          break;
 	        case 'left-middle':
-	          position.x = targetOffset.left - elWidth;
+	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'left-top':
-	          position.x = targetOffset.left - elWidth;
-	          position.y = targetOffset.top;
+	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
+	          position.y = targetOffset.top - toolTipTopOffset;
 	          break;
-	        default:
-	          // Default as same as bottom-left
-	          position.x = targetOffset.left;
-	          position.y = targetOffset.top + targetHeight;
 	      }
 	
 	      this.setState({
@@ -20747,7 +20751,7 @@
 	      if (reset) {
 	        currentIndex = this.options.startIndex;
 	      }
-	      this.processTarget(currentIndex);
+	      this.currentTarget(currentIndex);
 	      this.setState({
 	        show: true,
 	        currentIndex: currentIndex
@@ -20759,51 +20763,91 @@
 	      var callback = arguments[2];
 	
 	      var currentIndex = this.state.currentIndex;
+	      this.previousTarget(currentIndex);
+	      // Reset currentIndex
 	      if (reset) {
 	        currentIndex = this.options.startIndex;
 	      }
-	      (0, _jquery2.default)(targetClassName).removeClass(targetClassName);
 	      this.setState({
 	        show: false,
 	        currentIndex: currentIndex
 	      }, this._renderLayer);
 	      if (typeof callback === 'function') {
-	        callback();
+	        callback.call(this);
 	      }
 	    },
 	
 	    previousTooltip: function previousTooltip(evt) {
 	      var previousIndex = this.state.currentIndex;
 	      var currentIndex = previousIndex - 1;
-	      this.processPreviousElement(previousIndex);
-	      this.processTarget(currentIndex);
+	      this.previousTarget(previousIndex);
+	      this.currentTarget(currentIndex);
 	      this.setState({ show: true, currentIndex: currentIndex }, this.scrollToNextStep);
 	    },
 	
 	    nextTooltip: function nextTooltip(evt) {
 	      var previousIndex = this.state.currentIndex;
 	      var currentIndex = previousIndex + 1;
-	      this.processPreviousElement(previousIndex);
-	      this.processTarget(currentIndex);
+	      this.previousTarget(previousIndex);
+	      this.currentTarget(currentIndex);
 	      this.setState({ show: true, currentIndex: currentIndex }, this.scrollToNextStep);
 	    },
 	
-	    processTarget: function processTarget(index) {
-	      var step = this.options.steps[index];
-	      var $target = step && step.selector ? (0, _jquery2.default)(step.selector) : null;
-	      if (!$target) {
-	        return;
+	    getStepOption: function getStepOption(step, name, type) {
+	      if (step[name]) {
+	        return step[name];
 	      }
-	      $target.addClass(targetClassName);
+	      return this.options[name];
 	    },
 	
-	    processPreviousElement: function processPreviousElement(index) {
+	    getClassNames: function getClassNames(names, step) {
+	      var _this = this;
+	
+	      return names.map(function (name) {
+	        var className = _this.options.classNames[name];
+	        if (!step) {
+	          return className;
+	        }
+	        if (step.classNames && step.classNames[name]) {
+	          className = step.classNames[name];
+	        }
+	        return className;
+	      });
+	    },
+	
+	    currentTarget: function currentTarget(index) {
 	      var step = this.options.steps[index];
 	      var $target = step && step.selector ? (0, _jquery2.default)(step.selector) : null;
 	      if (!$target) {
 	        return;
 	      }
-	      $target.removeClass(targetClassName);
+	      // Added identified target
+	      var noPositionClassNames = ['fixed', 'relative', 'absolute'];
+	      var needClass = function () {
+	        if (noPositionClassNames.indexOf($target.css('position')) < 0) {
+	          return ['target', 'position'];
+	        };
+	        return ['target'];
+	      }();
+	      var classNames = this.getClassNames(needClass, step);
+	      $target.addClass(classNames.join(' '));
+	      if (typeof step.beCurrent === 'function') {
+	        step.beCurrent.call(this, $target);
+	      }
+	    },
+	
+	    previousTarget: function previousTarget(index) {
+	      var step = this.options.steps[index];
+	      var $target = step && step.selector ? (0, _jquery2.default)(step.selector) : null;
+	      if (!$target) {
+	        return;
+	      }
+	      // Added identified target
+	      var classNames = this.getClassNames(['target', 'position'], step);
+	      $target.removeClass(classNames.join(' '));
+	      if (typeof step.bePrevious === 'function') {
+	        step.bePrevious.call(this, $target);
+	      }
 	    },
 	
 	    scrollToNextStep: function scrollToNextStep() {
@@ -20826,36 +20870,42 @@
 	
 	    renderCurrentStep: function renderCurrentStep() {
 	      var currentStep = this.options.steps[this.state.currentIndex];
-	      if (!currentStep.placement) {
-	        currentStep.placement = 'bottom-left';
-	      }
 	      var maxStepIndex = this.options.steps.length - 1;
 	      var $target = currentStep && currentStep.selector ? (0, _jquery2.default)(currentStep.selector) : null;
 	      var cssPosition = $target ? $target.css('position') : null;
+	      var maskPadding = this.getStepOption(currentStep, 'maskPadding');
 	      var element = void 0;
 	
 	      if (this.state.show && $target && $target.length) {
-	        element = _react2.default.createElement(_Tooltip2.default, { cssPosition: cssPosition,
-	          placement: currentStep.placement.toLowerCase(),
+	        element = _react2.default.createElement(_Tooltip2.default, {
+	          cssPosition: cssPosition,
+	          maskPadding: maskPadding,
+	          placement: this.getStepOption(currentStep, 'placement'),
 	          xPos: this.state.xPos,
 	          yPos: this.state.yPos,
-	          targetXPos: this.state.targetXPos,
-	          targetYPos: this.state.targetYPos,
+	          targetXPos: this.state.targetXPos - maskPadding,
+	          targetYPos: this.state.targetYPos - maskPadding,
 	          targetWidth: this.state.targetWidth,
 	          targetHeight: this.state.targetHeight,
 	          text: currentStep.text,
 	          extraButtons: currentStep.extraButtons,
 	          isFirst: this.state.currentIndex === 0,
 	          isLast: this.state.currentIndex === maxStepIndex,
-	          hideTourGuide: this.hideTourGuide,
+	          hideTourGuide: function hideTourGuide(evt) {
+	            this.handleCancel(evt).bind(this);
+	          },
 	          onPrevious: this.previousTooltip,
 	          onNext: this.nextTooltip,
 	          onDone: function (evt) {
 	            this.handleDone(evt);
 	          }.bind(this),
+	          onClose: function (evt) {
+	            this.handleCancel(evt);
+	          }.bind(this),
 	          onCancel: function (evt) {
 	            this.handleCancel(evt);
 	          }.bind(this),
+	          enableCloseButton: this.getStepOption(currentStep, 'enableCloseButton'),
 	          locale: this.options.locale
 	        });
 	      } else {
@@ -30957,7 +31007,14 @@
 	    var onPrevious = _props.onPrevious;
 	    var onNext = _props.onNext;
 	    var onDone = _props.onDone;
+	    var onClose = _props.onClose;
+	    var enableCloseButton = _props.enableCloseButton;
 	
+	
+	    var closeButton = _react2.default.createElement(_Buttons.CloseButton, {
+	      key: 'close',
+	      locale: locale,
+	      onClick: onClose });
 	
 	    var previousButton = _react2.default.createElement(_Buttons.PreviousButton, {
 	      key: 'previous',
@@ -30984,11 +31041,13 @@
 	    } else if (!isFirst && isLast) {
 	      buttons = [previousButton, doneButton];
 	    }
-	
+	    if (enableCloseButton) {
+	      buttons.unshift(closeButton);
+	    }
 	    if (Array.isArray(extraButtons)) {
 	      buttons = buttons.concat(extraButtons);
 	    }
-	
+	    console.log(buttons);
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'rc-tour-buttons' },
@@ -30999,6 +31058,7 @@
 	  Tooltip.prototype.render = function render() {
 	    var _props2 = this.props;
 	    var cssPosition = _props2.cssPosition;
+	    var maskPadding = _props2.maskPadding;
 	    var placement = _props2.placement;
 	    var xPos = _props2.xPos;
 	    var yPos = _props2.yPos;
@@ -31016,9 +31076,10 @@
 	      left: targetXPos,
 	      top: targetYPos,
 	      width: targetWidth,
-	      height: targetHeight
+	      height: targetHeight,
+	      padding: maskPadding + 'px'
 	    };
-	
+	    console.log(maskStyles);
 	    var toolTipStyles = {
 	      position: cssPosition === 'fixed' ? 'fixed' : 'absolute',
 	      left: xPos,
@@ -31086,7 +31147,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.DoneButton = exports.NextButton = exports.PreviousButton = undefined;
+	exports.DoneButton = exports.NextButton = exports.PreviousButton = exports.CloseButton = undefined;
 	
 	var _react = __webpack_require__(2);
 	
@@ -31094,9 +31155,23 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PreviousButton = exports.PreviousButton = function PreviousButton(_ref) {
+	var CloseButton = exports.CloseButton = function CloseButton(_ref) {
 	  var locale = _ref.locale;
 	  var onClick = _ref.onClick;
+	
+	  return _react2.default.createElement(
+	    "button",
+	    {
+	      className: "tour-close-btn",
+	      onClick: onClick
+	    },
+	    locale.close
+	  );
+	};
+	
+	var PreviousButton = exports.PreviousButton = function PreviousButton(_ref2) {
+	  var locale = _ref2.locale;
+	  var onClick = _ref2.onClick;
 	
 	  return _react2.default.createElement(
 	    "button",
@@ -31108,9 +31183,9 @@
 	  );
 	};
 	
-	var NextButton = exports.NextButton = function NextButton(_ref2) {
-	  var locale = _ref2.locale;
-	  var onClick = _ref2.onClick;
+	var NextButton = exports.NextButton = function NextButton(_ref3) {
+	  var locale = _ref3.locale;
+	  var onClick = _ref3.onClick;
 	
 	  return _react2.default.createElement(
 	    "button",
@@ -31122,9 +31197,9 @@
 	  );
 	};
 	
-	var DoneButton = exports.DoneButton = function DoneButton(_ref3) {
-	  var locale = _ref3.locale;
-	  var onClick = _ref3.onClick;
+	var DoneButton = exports.DoneButton = function DoneButton(_ref4) {
+	  var locale = _ref4.locale;
+	  var onClick = _ref4.onClick;
 	
 	  return _react2.default.createElement(
 	    "button",
@@ -31146,8 +31221,9 @@
 	  value: true
 	});
 	exports.default = {
-	  previous: '< 上一个',
-	  next: '下一个 >',
+	  close: '关闭',
+	  previous: '上一个',
+	  next: '下一个',
 	  done: '完成'
 	};
 	module.exports = exports['default'];

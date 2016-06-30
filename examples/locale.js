@@ -1,14 +1,14 @@
-webpackJsonp([3],{
+webpackJsonp([1],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(180);
+	module.exports = __webpack_require__(178);
 
 
 /***/ },
 
-/***/ 180:
+/***/ 178:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29,7 +29,15 @@ webpackJsonp([3],{
 	
 	__webpack_require__(177);
 	
+	/* Defined the button texts */
+	var locale = {
+	  next: 'Next',
+	  previous: 'Previous',
+	  done: 'Done'
+	};
+	
 	var tour = {
+	  locale: locale,
 	  startIndex: 0,
 	  scrollToSteps: true,
 	  steps: [{
@@ -221,4 +229,4 @@ webpackJsonp([3],{
 /***/ }
 
 });
-//# sourceMappingURL=position.js.map
+//# sourceMappingURL=locale.js.map
