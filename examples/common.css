@@ -35,6 +35,7 @@
   border-radius: 4px;
   padding: 8px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
 }
 .rc-tour-guide .rc-tour-tooltip p {
   margin: 5px 3px;
@@ -140,6 +141,9 @@
   border-bottom-color: transparent;
   border-left-color: white;
 }
+.rc-tour-guide .rc-tour-tooltip .rc-tour-buttons {
+  text-align: right;
+}
 .rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button {
   color: #666;
   background-color: white;
@@ -147,6 +151,13 @@
   border-radius: 4px;
   margin: 0 2px;
   outline: none;
+  font-size: 0.9rem;
+  padding: 0 4px;
+}
+.rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button.tour-done-btn {
+  background: #2baee9;
+  border: 1px solid #2baee9;
+  color: #eee;
 }
 .rc-tour-guide .rc-tour-tooltip .rc-tour-buttons > button:hover {
   border-color: #57c5f7;

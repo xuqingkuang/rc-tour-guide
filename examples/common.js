@@ -20544,9 +20544,9 @@
 	  return {
 	    options: (0, _objectAssign2.default)({
 	      placement: 'bottom-left',
-	      maskPadding: 2,
-	      toolTipTopOffset: 2,
-	      toolTipLeftOffset: 2,
+	      maskPadding: 6,
+	      toolTipTopOffset: 3,
+	      toolTipLeftOffset: 3,
 	      startIndex: 0,
 	      scrollToSteps: true,
 	      locale: _zh_CN2.default,
@@ -20667,8 +20667,8 @@
 	      }
 	      var step = this.options.steps[this.state.currentIndex];
 	      var maskPadding = this.getStepOption(step, 'maskPadding');
-	      var toolTipTopOffset = this.getStepOption(step, 'toolTipTopOffset') + maskPadding;
-	      var toolTipLeftOffset = this.getStepOption(step, 'toolTipLeftOffset') + maskPadding;
+	      var toolTipTopOffset = this.getStepOption(step, 'toolTipTopOffset');
+	      var toolTipLeftOffset = this.getStepOption(step, 'toolTipLeftOffset');
 	      var placement = this.getStepOption(step, 'placement');
 	      var $target = (0, _jquery2.default)(step.selector);
 	      var targetOffset = $target.offset();
@@ -20682,53 +20682,57 @@
 	      // Calculate x position
 	      switch (placement) {
 	        case 'top-left':
-	          position.x = targetOffset.left - toolTipLeftOffset;
-	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
+	          position.x = targetOffset.left - maskPadding;
+	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'top-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
+	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'top-right':
-	          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
-	          position.y = targetOffset.top - elHeight - toolTipTopOffset;
+	          position.x = targetOffset.left + targetWidth - elWidth + (toolTipLeftOffset + maskPadding);
+	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'right-top':
-	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
-	          position.y = targetOffset.top - toolTipTopOffset;
+	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
+	          position.y = targetOffset.top - maskPadding;
 	          break;
 	        case 'right-middle':
-	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
+	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'right-bottom':
-	          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
-	          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
+	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight - elHeight + maskPadding;
 	          break;
 	        case 'bottom-right':
-	          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
-	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
+	          position.x = targetOffset.left + targetWidth - elWidth + maskPadding;
+	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'bottom-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
+	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'bottom-left':
-	          position.x = targetOffset.left - toolTipLeftOffset;
-	          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
+	          position.x = targetOffset.left - maskPadding;
+	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
 	          break;
 	        case 'left-bottom':
-	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
-	          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
+	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight - elHeight + maskPadding;
 	          break;
 	        case 'left-middle':
-	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
+	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'left-top':
-	          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
-	          position.y = targetOffset.top - toolTipTopOffset;
+	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
+	          position.y = targetOffset.top - maskPadding;
 	          break;
+	        default:
+	          console.error('Placement got mistake - ' + placement + ', using default bottom-left.');
+	          position.x = targetOffset.left - maskPadding;
+	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
 	      }
 	
 	      this.setState({
@@ -31041,13 +31045,13 @@
 	    } else if (!isFirst && isLast) {
 	      buttons = [previousButton, doneButton];
 	    }
-	    if (enableCloseButton) {
-	      buttons.unshift(closeButton);
+	    if (enableCloseButton && !isLast) {
+	      buttons.push(closeButton);
 	    }
 	    if (Array.isArray(extraButtons)) {
 	      buttons = buttons.concat(extraButtons);
 	    }
-	    console.log(buttons);
+	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'rc-tour-buttons' },
@@ -31079,7 +31083,7 @@
 	      height: targetHeight,
 	      padding: maskPadding + 'px'
 	    };
-	    console.log(maskStyles);
+	
 	    var toolTipStyles = {
 	      position: cssPosition === 'fixed' ? 'fixed' : 'absolute',
 	      left: xPos,
