@@ -262,7 +262,7 @@ export default (options, done, cancel) => {
     },
 
     getStepOption: function(step, name, type) {
-      if (step[name]) {
+      if (typeof step[name] !== 'undefined') {
         return step[name]
       }
       return this.options[name]
