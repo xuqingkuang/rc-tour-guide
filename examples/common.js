@@ -31049,7 +31049,7 @@
 	      buttons.push(closeButton);
 	    }
 	    if (Array.isArray(extraButtons)) {
-	      buttons = buttons.concat(extraButtons);
+	      buttons = extraButtons.concat(buttons);
 	    }
 	
 	    return _react2.default.createElement(
