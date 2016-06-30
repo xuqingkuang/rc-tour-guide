@@ -42,6 +42,7 @@
     border-radius: 4px;
     padding: 8px;
     box-shadow: 0 1px 10px rgba(0, 0, 0, .4);
+    font-size: 0.9rem;
   
     p {
       margin: 5px 3px;
@@ -149,22 +150,33 @@
       }
     }
   
-    .rc-tour-buttons > button {
-      color: #666;
-      background-color: white;
-      border: 1px solid #666;
-      border-radius: 4px;
-      margin: 0 2px;
-      outline: none;
+    .rc-tour-buttons {
+      text-align: right;
+      > button {
+        color: #666;
+        background-color: white;
+        border: 1px solid #666;
+        border-radius: 4px;
+        margin: 0 2px;
+        outline: none;
+        font-size: 0.9rem;
+        padding: 0 4px;
 
-      &:hover {
-        border-color: @hoverColor;
-        color: @hoverColor;
-      }
-    
-      &:active {
-        background-color: @hoverColor;
-        color: white;
+        &.tour-done-btn {
+          background: @activeColor;
+          border: 1px solid @activeColor;
+          color: #eee;
+        }
+
+        &:hover {
+          border-color: @hoverColor;
+          color: @hoverColor;
+        }
+
+        &:active {
+          background-color: @hoverColor;
+          color: white;
+        }
       }
     }
   }

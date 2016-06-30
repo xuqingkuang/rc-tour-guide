@@ -109,13 +109,13 @@ export default class Tooltip extends Component {
         doneButton,
       ];
     }
-    if (enableCloseButton) {
-      buttons.unshift(closeButton);
+    if (enableCloseButton && !isLast) {
+      buttons.push(closeButton);
     }
     if (Array.isArray(extraButtons)) {
       buttons = buttons.concat(extraButtons);
     }
-    console.log(buttons);
+
     return (
       <div className="rc-tour-buttons">
         {buttons}
@@ -147,7 +147,7 @@ export default class Tooltip extends Component {
       height: targetHeight,
       padding: `${maskPadding}px`,
     };
-    console.log(maskStyles)
+
     const toolTipStyles = {
       position: cssPosition === 'fixed' ? 'fixed' : 'absolute',
       left: xPos,
