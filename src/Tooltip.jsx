@@ -113,7 +113,7 @@ export default class Tooltip extends Component {
       buttons.push(closeButton);
     }
     if (Array.isArray(extraButtons)) {
-      buttons = buttons.concat(extraButtons);
+      buttons = extraButtons.concat(buttons);
     }
 
     return (
