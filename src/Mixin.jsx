@@ -16,10 +16,14 @@ export default (options, done, cancel) => {
 
   return {
     options: objectAssign({
+      placement: 'bottom-left',
+      maskPadding: 2,
+      toolTipTopOffset: 2,
+      toolTipLeftOffset: 2,
       startIndex: 0,
       scrollToSteps: true,
-      steps: [],
       locale: Locale,
+      steps: [],
       classNames: {
         target: 'rc-tour-guide-target',
         position: 'rc-tour-guide-relative',
@@ -134,7 +138,10 @@ export default (options, done, cancel) => {
         return
       }
       const step = this.options.steps[this.state.currentIndex];
-      const placement = step.placement;
+      const maskPadding = this.getStepOption(step, 'maskPadding');
+      const toolTipTopOffset = this.getStepOption(step, 'toolTipTopOffset') + maskPadding;
+      const toolTipLeftOffset = this.getStepOption(step, 'toolTipLeftOffset') + maskPadding;
+      const placement = this.getStepOption(step, 'placement');
       const $target = $(step.selector);
       const targetOffset = $target.offset();
       const targetWidth = $target.outerWidth();
@@ -145,59 +152,55 @@ export default (options, done, cancel) => {
       const position = { x: -1000, y: -1000, };
 
       // Calculate x position
-      switch (step.placement) {
+      switch (placement) {
         case 'top-left':
-          position.x = targetOffset.left;
-          position.y = targetOffset.top - elHeight;
+          position.x = targetOffset.left - toolTipLeftOffset;
+          position.y = targetOffset.top - elHeight - toolTipTopOffset;
           break;
         case 'top-center':
           position.x = (targetOffset.left + targetWidth / 2) - (elWidth / 2);
-          position.y = targetOffset.top - elHeight;
+          position.y = targetOffset.top - elHeight - toolTipTopOffset;
           break;
         case 'top-right':
-          position.x = targetOffset.left + targetWidth - elWidth;
-          position.y = targetOffset.top - elHeight;
+          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
+          position.y = targetOffset.top - elHeight - toolTipTopOffset;
           break;
         case 'right-top':
-          position.x = targetOffset.left + targetWidth;
-          position.y = targetOffset.top;
+          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
+          position.y = targetOffset.top - toolTipTopOffset;
           break;
         case 'right-middle':
-          position.x = targetOffset.left + targetWidth;
+          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
           position.y = (targetOffset.top + targetHeight / 2) - (elHeight / 2);
           break;
         case 'right-bottom':
-          position.x = targetOffset.left + targetWidth;
-          position.y = targetOffset.top + targetHeight - elHeight;
+          position.x = targetOffset.left + targetWidth + toolTipLeftOffset;
+          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
           break;
         case 'bottom-right':
-          position.x = targetOffset.left + targetWidth - elWidth;
-          position.y = targetOffset.top + targetHeight;
+          position.x = targetOffset.left + targetWidth - elWidth + toolTipLeftOffset;
+          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
           break;
         case 'bottom-center':
           position.x = (targetOffset.left + targetWidth / 2) - (elWidth / 2);
-          position.y = targetOffset.top + targetHeight;
+          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
           break;
         case 'bottom-left':
-          position.x = targetOffset.left;
-          position.y = targetOffset.top + targetHeight;
+          position.x = targetOffset.left - toolTipLeftOffset;
+          position.y = targetOffset.top + targetHeight + toolTipTopOffset;
           break;
         case 'left-bottom':
-          position.x = targetOffset.left - elWidth;
-          position.y = targetOffset.top + targetHeight - elHeight;
+          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
+          position.y = targetOffset.top + targetHeight - elHeight + toolTipTopOffset;
           break;
         case 'left-middle':
-          position.x = targetOffset.left - elWidth;
+          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
           position.y = (targetOffset.top + targetHeight / 2) - (elHeight / 2);
           break;
         case 'left-top':
-          position.x = targetOffset.left - elWidth;
-          position.y = targetOffset.top
+          position.x = targetOffset.left - elWidth - toolTipLeftOffset;
+          position.y = targetOffset.top - toolTipTopOffset;
           break;
-        default:
-          // Default as same as bottom-left
-          position.x = targetOffset.left;
-          position.y = targetOffset.top + targetHeight;
       }
 
       this.setState({
@@ -255,6 +258,13 @@ export default (options, done, cancel) => {
       this.previousTarget(previousIndex);
       this.currentTarget(currentIndex);
       this.setState({ show: true, currentIndex }, this.scrollToNextStep);
+    },
+
+    getStepOption: function(step, name, type) {
+      if (step[name]) {
+        return step[name]
+      }
+      return this.options[name]
     },
 
     getClassNames: function(names, step) {
@@ -325,22 +335,22 @@ export default (options, done, cancel) => {
 
     renderCurrentStep: function () {
       const currentStep = this.options.steps[this.state.currentIndex];
-      if (!currentStep.placement) {
-        currentStep.placement = 'bottom-left';
-      }
       const maxStepIndex = this.options.steps.length - 1;
       const $target = currentStep && currentStep.selector ? $(currentStep.selector) : null;
       const cssPosition = $target ? $target.css('position') : null;
+      const maskPadding = this.getStepOption(currentStep, 'maskPadding');
       let element;
 
       if ( this.state.show && $target && $target.length) {
         element = (
-          <Tooltip cssPosition={ cssPosition }
-            placement={ currentStep.placement.toLowerCase() }
+          <Tooltip
+            cssPosition={ cssPosition }
+            maskPadding={ maskPadding }
+            placement={ this.getStepOption(currentStep, 'placement') }
             xPos={ this.state.xPos }
             yPos={ this.state.yPos }
-            targetXPos={ this.state.targetXPos }
-            targetYPos={ this.state.targetYPos }
+            targetXPos={ this.state.targetXPos - maskPadding }
+            targetYPos={ this.state.targetYPos - maskPadding }
             targetWidth={ this.state.targetWidth }
             targetHeight={ this.state.targetHeight }
             text={ currentStep.text }

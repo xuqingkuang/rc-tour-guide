@@ -115,6 +115,7 @@ export default class Tooltip extends Component {
   render () {
     const {
       cssPosition,
+      maskPadding,
       placement,
       xPos,
       yPos,
@@ -133,8 +134,9 @@ export default class Tooltip extends Component {
       top: targetYPos,
       width: targetWidth,
       height: targetHeight,
+      padding: `${maskPadding}px`,
     };
-
+    console.log(maskStyles)
     const toolTipStyles = {
       position: cssPosition === 'fixed' ? 'fixed' : 'absolute',
       left: xPos,
