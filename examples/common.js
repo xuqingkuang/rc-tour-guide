@@ -30975,6 +30975,10 @@
 	  value: true
 	});
 	
+	var _objectAssign = __webpack_require__(5);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -31094,6 +31098,7 @@
 	      'div',
 	      { className: 'rc-tour-guide' },
 	      _react2.default.createElement('div', { className: 'rc-tour-backdrop', onClick: onCancel }),
+	      _react2.default.createElement('div', { className: 'rc-tour-helper', style: maskStyles }),
 	      _react2.default.createElement('div', { className: 'rc-tour-mask', style: maskStyles }),
 	      _react2.default.createElement(
 	        'div',
