@@ -15,9 +15,11 @@
   filter: "alpha(opacity=50)";
 }
 .rc-tour-guide .rc-tour-helper {
+  box-sizing: initial;
   z-index: 999999;
   background-color: transparent;
   cursor: default;
+  border-radius: 4px;
 }
 .rc-tour-guide .rc-tour-mask {
   box-sizing: initial;
