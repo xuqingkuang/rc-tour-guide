@@ -10,6 +10,7 @@ require('./style.less');
 const locale = {
   next: 'Next',
   previous: 'Previous',
+  close: 'Close',
   done: 'Done'
 }
 
