@@ -1,3 +1,4 @@
+import objectAssign from 'object-assign';
 import React, { Component, PropTypes } from 'react';
 import { CloseButton, PreviousButton, NextButton, DoneButton } from './Buttons';
 
@@ -159,6 +160,7 @@ export default class Tooltip extends Component {
     return (
       <div className="rc-tour-guide">
         <div className="rc-tour-backdrop" onClick={onCancel} />
+        <div className="rc-tour-helper" style={maskStyles}></div>
         <div className="rc-tour-mask" style={maskStyles}></div>
         <div className="rc-tour-tooltip" style={toolTipStyles}>
           <p>{text || ''}</p>

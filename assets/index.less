@@ -11,12 +11,18 @@
 
     transition: all .3s ease-out;
     z-index: 999999;
-    
+
     background-color: black;
     opacity: .8;
     background: radial-gradient(center,ellipse cover,rgba(0, 0, 0, 0.4) 0,rgba(0,0,0,0.9) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000',endColorstr='#e6000000',GradientType=1);
     filter: "alpha(opacity=50)";
+  }
+
+  .rc-tour-helper {
+    z-index: 10000000;
+    background-color: transparent;
+    cursor: default;
   }
 
   .rc-tour-mask {
@@ -25,10 +31,10 @@
     border: 1px solid rgba(0,0,0,.5);
     border-radius: 4px;
     box-shadow: 0 2px 15px rgba(0,0,0,.4);
-    
+
     transition: all .3s ease-out;
     z-index: 9999998;
-    
+
     background-color: white;
     background-color: rgba(255, 255, 255, .6);
   }
@@ -44,11 +50,11 @@
     padding: 8px;
     box-shadow: 0 1px 10px rgba(0, 0, 0, .4);
     font-size: 0.9rem;
-  
+
     p {
       margin: 5px 3px;
     }
-  
+
     .rc-tour-arrow {
       border: 5px solid white;
       content: '';
