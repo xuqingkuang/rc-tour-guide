@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>padding.js - example - rc-tour-guide@0.0.11</title>
+  <title>padding.js - example - rc-tour-guide@0.0.12</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tour-guide@0.0.11</h1>
+      <h1>rc-tour-guide@0.0.12</h1>
 
       <p>Tour Guide component for react</p>
     </div>
@@ -274,25 +274,50 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
 <span class="hljs-keyword">const</span> tour = {
   placement: <span class="hljs-string">'bottom-right'</span>,
+  maskPadding: <span class="hljs-number">2</span>,
+  toolTipOffset: <span class="hljs-number">0</span>,
   steps: [
     {
       text: <span class="hljs-string">'I have 2px padding'</span>,
-      selector: <span class="hljs-string">'.padding-1px'</span>,
+      selector: <span class="hljs-string">'.padding-2px'</span>,
     },
     {
       text: <span class="hljs-string">'I have 4px padding'</span>,
-      selector: <span class="hljs-string">'.padding-3px'</span>,
+      selector: <span class="hljs-string">'.padding-4px'</span>,
       maskPadding: <span class="hljs-number">4</span>,
     },
     {
       text: <span class="hljs-string">'I have 6px padding'</span>,
-      selector: <span class="hljs-string">'.padding-5px'</span>,
+      selector: <span class="hljs-string">'.padding-6px'</span>,
       maskPadding: <span class="hljs-number">6</span>,
     },
     {
       text: <span class="hljs-string">'I have 10px padding'</span>,
       selector: <span class="hljs-string">'.padding-10px'</span>,
       maskPadding: <span class="hljs-number">10</span>,
+    },
+    {
+      text: <span class="hljs-string">'I have 2px padding and 4px offset'</span>,
+      selector: <span class="hljs-string">'.padding-2px-offset-4px'</span>,
+      toolTipOffset: <span class="hljs-number">4</span>
+    },
+    {
+      text: <span class="hljs-string">'I have 4px padding and 8px offset'</span>,
+      selector: <span class="hljs-string">'.padding-4px-offset-8px'</span>,
+      maskPadding: <span class="hljs-number">4</span>,
+      toolTipOffset: <span class="hljs-number">8</span>
+    },
+    {
+      text: <span class="hljs-string">'I have 6px padding and 10px offset'</span>,
+      selector: <span class="hljs-string">'.padding-6px-offset-10px'</span>,
+      maskPadding: <span class="hljs-number">6</span>,
+      toolTipOffset: <span class="hljs-number">10</span>
+    },
+    {
+      text: <span class="hljs-string">'I have 10px padding and 20px offset'</span>,
+      selector: <span class="hljs-string">'.padding-10px-offset-20px'</span>,
+      maskPadding: <span class="hljs-number">10</span>,
+      toolTipOffset: <span class="hljs-number">20</span>
     },
   ]
 };
@@ -318,17 +343,31 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
         <span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
           <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-1px"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-2px"</span>&gt;</span>
                 Default 2px padding
               <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-3px"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-4px"</span>&gt;</span>
                 Step defined 4px padding
               <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-5px"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-6px"</span>&gt;</span>
                 Step defined 6px padding
               <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
               <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-10px"</span>&gt;</span>
                 Step defined 10px padding
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-2px-offset-4px"</span>&gt;</span>
+                Default 2px padding and 4px offset
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-4px-offset-8px"</span>&gt;</span>
+                Step defined 4px padding and 8px offset
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-6px-offset-10px"</span>&gt;</span>
+                Step defined 6px padding and 10px offset
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"padding-10px-offset-20px"</span>&gt;</span>
+                Step defined 10px padding and 20px offset
               <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
           <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>

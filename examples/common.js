@@ -20545,8 +20545,7 @@
 	    options: (0, _objectAssign2.default)({
 	      placement: 'bottom-left',
 	      maskPadding: 6,
-	      toolTipTopOffset: 3,
-	      toolTipLeftOffset: 3,
+	      toolTipOffset: 3,
 	      startIndex: 0,
 	      scrollToSteps: true,
 	      locale: _zh_CN2.default,
@@ -20667,8 +20666,7 @@
 	      }
 	      var step = this.options.steps[this.state.currentIndex];
 	      var maskPadding = this.getStepOption(step, 'maskPadding');
-	      var toolTipTopOffset = this.getStepOption(step, 'toolTipTopOffset');
-	      var toolTipLeftOffset = this.getStepOption(step, 'toolTipLeftOffset');
+	      var toolTipOffset = this.getStepOption(step, 'toolTipOffset');
 	      var placement = this.getStepOption(step, 'placement');
 	      var $target = (0, _jquery2.default)(step.selector);
 	      var targetOffset = $target.offset();
@@ -20683,56 +20681,56 @@
 	      switch (placement) {
 	        case 'top-left':
 	          position.x = targetOffset.left - maskPadding;
-	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
 	          break;
 	        case 'top-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
 	          break;
 	        case 'top-right':
-	          position.x = targetOffset.left + targetWidth - elWidth + (toolTipLeftOffset + maskPadding);
-	          position.y = targetOffset.top - elHeight - (toolTipTopOffset + maskPadding);
+	          position.x = targetOffset.left + targetWidth - elWidth + (toolTipOffset + maskPadding);
+	          position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
 	          break;
 	        case 'right-top':
-	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top - maskPadding;
 	          break;
 	        case 'right-middle':
-	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'right-bottom':
-	          position.x = targetOffset.left + targetWidth + (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight - elHeight + maskPadding;
 	          break;
 	        case 'bottom-right':
 	          position.x = targetOffset.left + targetWidth - elWidth + maskPadding;
-	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
 	          break;
 	        case 'bottom-center':
 	          position.x = targetOffset.left + targetWidth / 2 - elWidth / 2;
-	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
 	          break;
 	        case 'bottom-left':
 	          position.x = targetOffset.left - maskPadding;
-	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
 	          break;
 	        case 'left-bottom':
-	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight - elHeight + maskPadding;
 	          break;
 	        case 'left-middle':
-	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top + targetHeight / 2 - elHeight / 2;
 	          break;
 	        case 'left-top':
-	          position.x = targetOffset.left - elWidth - (toolTipLeftOffset + maskPadding);
+	          position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
 	          position.y = targetOffset.top - maskPadding;
 	          break;
 	        default:
 	          console.error('Placement got mistake - ' + placement + ', using default bottom-left.');
 	          position.x = targetOffset.left - maskPadding;
-	          position.y = targetOffset.top + targetHeight + (toolTipTopOffset + maskPadding);
+	          position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
 	      }
 	
 	      this.setState({

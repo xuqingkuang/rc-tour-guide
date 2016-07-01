@@ -31,21 +31,42 @@ webpackJsonp([2],{
 	
 	var tour = {
 	  placement: 'bottom-right',
+	  maskPadding: 2,
+	  toolTipOffset: 0,
 	  steps: [{
 	    text: 'I have 2px padding',
-	    selector: '.padding-1px'
+	    selector: '.padding-2px'
 	  }, {
 	    text: 'I have 4px padding',
-	    selector: '.padding-3px',
+	    selector: '.padding-4px',
 	    maskPadding: 4
 	  }, {
 	    text: 'I have 6px padding',
-	    selector: '.padding-5px',
+	    selector: '.padding-6px',
 	    maskPadding: 6
 	  }, {
 	    text: 'I have 10px padding',
 	    selector: '.padding-10px',
 	    maskPadding: 10
+	  }, {
+	    text: 'I have 2px padding and 4px offset',
+	    selector: '.padding-2px-offset-4px',
+	    toolTipOffset: 4
+	  }, {
+	    text: 'I have 4px padding and 8px offset',
+	    selector: '.padding-4px-offset-8px',
+	    maskPadding: 4,
+	    toolTipOffset: 8
+	  }, {
+	    text: 'I have 6px padding and 10px offset',
+	    selector: '.padding-6px-offset-10px',
+	    maskPadding: 6,
+	    toolTipOffset: 10
+	  }, {
+	    text: 'I have 10px padding and 20px offset',
+	    selector: '.padding-10px-offset-20px',
+	    maskPadding: 10,
+	    toolTipOffset: 20
 	  }]
 	};
 	
@@ -81,23 +102,47 @@ webpackJsonp([2],{
 	            null,
 	            _react2.default.createElement(
 	              'td',
-	              { className: 'padding-1px' },
+	              { className: 'padding-2px' },
 	              'Default 2px padding'
 	            ),
 	            _react2.default.createElement(
 	              'td',
-	              { className: 'padding-3px' },
+	              { className: 'padding-4px' },
 	              'Step defined 4px padding'
 	            ),
 	            _react2.default.createElement(
 	              'td',
-	              { className: 'padding-5px' },
+	              { className: 'padding-6px' },
 	              'Step defined 6px padding'
 	            ),
 	            _react2.default.createElement(
 	              'td',
 	              { className: 'padding-10px' },
 	              'Step defined 10px padding'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tr',
+	            null,
+	            _react2.default.createElement(
+	              'td',
+	              { className: 'padding-2px-offset-4px' },
+	              'Default 2px padding and 4px offset'
+	            ),
+	            _react2.default.createElement(
+	              'td',
+	              { className: 'padding-4px-offset-8px' },
+	              'Step defined 4px padding and 8px offset'
+	            ),
+	            _react2.default.createElement(
+	              'td',
+	              { className: 'padding-6px-offset-10px' },
+	              'Step defined 6px padding and 10px offset'
+	            ),
+	            _react2.default.createElement(
+	              'td',
+	              { className: 'padding-10px-offset-20px' },
+	              'Step defined 10px padding and 20px offset'
 	            )
 	          )
 	        )
