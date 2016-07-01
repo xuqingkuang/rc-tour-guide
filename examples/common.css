@@ -6,7 +6,7 @@
   left: 0;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-  z-index: 999999;
+  z-index: 999996;
   background-color: black;
   opacity: .8;
   background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
@@ -15,7 +15,7 @@
   filter: "alpha(opacity=50)";
 }
 .rc-tour-guide .rc-tour-helper {
-  z-index: 10000000;
+  z-index: 999999;
   background-color: transparent;
   cursor: default;
 }
@@ -27,12 +27,12 @@
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-  z-index: 9999998;
+  z-index: 999997;
   background-color: white;
   background-color: rgba(255, 255, 255, 0.6);
 }
 .rc-tour-guide .rc-tour-tooltip {
-  z-index: 10000000;
+  z-index: 1000000;
   visibility: visible;
   width: 250px;
   background-color: white;
@@ -176,7 +176,7 @@
 .rc-tour-guide-target,
 tr.rc-tour-guide-target > th,
 tr.rc-tour-guide-target > td {
-  z-index: 9999999 !important;
+  z-index: 999998 !important;
 }
 .rc-tour-guide-relative {
   position: relative;
