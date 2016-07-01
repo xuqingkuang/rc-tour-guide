@@ -152,56 +152,71 @@ export default (options, done, cancel) => {
 
       // Calculate x position
       switch (placement) {
+        case 'topLeft':
         case 'top-left':
           position.x = targetOffset.left - (maskPadding);
           position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
           break;
+        case 'top':
+        case 'topCenter':
         case 'top-center':
           position.x = (targetOffset.left + targetWidth / 2) - (elWidth / 2);
           position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
           break;
+        case 'topRight':
         case 'top-right':
           position.x = targetOffset.left + targetWidth - elWidth + (toolTipOffset + maskPadding);
           position.y = targetOffset.top - elHeight - (toolTipOffset + maskPadding);
           break;
+        case 'rightTop':
         case 'right-top':
           position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
           position.y = targetOffset.top - (maskPadding);
           break;
+        case 'right':
+        case 'rightMiddle':
         case 'right-middle':
           position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
           position.y = (targetOffset.top + targetHeight / 2) - (elHeight / 2);
           break;
+        case 'rightBottom':
         case 'right-bottom':
           position.x = targetOffset.left + targetWidth + (toolTipOffset + maskPadding);
           position.y = targetOffset.top + targetHeight - elHeight + (maskPadding);
           break;
+        case 'bottomRight':
         case 'bottom-right':
           position.x = targetOffset.left + targetWidth - elWidth + (maskPadding);
           position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
           break;
+        case 'bottom':
+        case 'bottomCenter':
         case 'bottom-center':
           position.x = (targetOffset.left + targetWidth / 2) - (elWidth / 2);
           position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
           break;
+        case 'bottomLeft':
         case 'bottom-left':
           position.x = targetOffset.left - (maskPadding);
           position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
           break;
+        case 'leftBottom':
         case 'left-bottom':
           position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
           position.y = targetOffset.top + targetHeight - elHeight + (maskPadding);
           break;
+        case 'left':
         case 'left-middle':
           position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
           position.y = (targetOffset.top + targetHeight / 2) - (elHeight / 2);
           break;
+        case 'leftTop':
         case 'left-top':
           position.x = targetOffset.left - elWidth - (toolTipOffset + maskPadding);
           position.y = targetOffset.top - (maskPadding);
           break;
         default:
-          console.error(`Placement got mistake - ${placement}, using default bottom-left.`);
+          console.error(`Placement got mistake - ${placement}, using default bottomLeft.`);
           position.x = targetOffset.left - (maskPadding);
           position.y = targetOffset.top + targetHeight + (toolTipOffset + maskPadding);
       }
