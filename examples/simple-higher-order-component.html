@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>custom-buttons.js - example - rc-tour-guide@0.0.16</title>
+  <title>simple-higher-order-component.js - example - rc-tour-guide@0.0.16</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -266,9 +266,9 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="js"><span class="hljs-comment">// use jsx to render html, do not modify simple.html</span>
 
-<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> { tourGuideMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tour-guide'</span>;
+<span class="hljs-keyword">import</span> tourGuide <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tour-guide'</span>;
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-tour-guide/assets/index.css'</span>);
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);
 
@@ -277,32 +277,55 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   scrollToSteps: <span class="hljs-literal">true</span>,
   steps: [
     {
-      text: <span class="hljs-string">'Used to express a greeting, answer a telephone, or attract attention.'</span>,
-      selector: <span class="hljs-string">'.hello'</span>,
-      extraButtons: [
-        (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">"1"</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{function()</span> { <span class="hljs-attribute">alert</span>("<span class="hljs-attribute">hello</span>") }}&gt;</span>say<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>)</span>
-      ],
+      text: <span class="hljs-string">'This is the first step in the tour.'</span>,
+      selector: <span class="hljs-string">'.block'</span>,
     },
     {
-      text: <span class="hljs-string">'The class of persons devoted to the affairs, interests, or pursuits of this life.'</span>,
-      selector: <span class="hljs-string">'.world'</span>,
-      extraButtons: [
-        (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">"1"</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{function()</span> { <span class="hljs-attribute">alert</span>("<span class="hljs-attribute">world</span>") }}&gt;</span>say<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>)</span>
-      ],
+      text: <span class="hljs-string">'This is the second step in the tour.'</span>,
+      selector: <span class="hljs-string">'.inline-block'</span>,
+      placement: <span class="hljs-string">'right-bottom'</span>,
+      enableCloseButton: <span class="hljs-literal">false</span>,
     },
+    {
+      text: <span class="hljs-string">'This is the third step in the tour.'</span>,
+      selector: <span class="hljs-string">'.float-right'</span>,
+      placement: <span class="hljs-string">'left-middle'</span>,
+    },
+    {
+      text: <span class="hljs-string">'This is the fourth step in the tour.'</span>,
+      selector: <span class="hljs-string">'.position-absolute'</span>,
+      placement: <span class="hljs-string">'bottom-right'</span>,
+    },
+    {
+      text: <span class="hljs-string">'This is the fifth step in the tour.'</span>,
+      selector: <span class="hljs-string">'.position-fixed'</span>,
+      beCurrent: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
+        $target.addClass(<span class="hljs-string">'red'</span>);
+      },
+      bePrevious: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$target</span>) </span>{
+        $target.removeClass(<span class="hljs-string">'red'</span>);
+      }
+    }
   ]
 };
 
 <span class="hljs-keyword">const</span> cb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has completed tour!'</span>);
 };
 
-<span class="hljs-keyword">const</span> TourGuide = React.createClass({
-  mixins: [ tourGuideMixin(tour, cb) ],
-  componentDidMount: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">const</span> cancel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has canceled the tour!'</span>);
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  componentDidMount () {
     <span class="hljs-keyword">this</span>.showTourGuide();
-  },
-  render: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  }
+
+  render () {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
@@ -313,13 +336,29 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
             Reset and Show Tour Guide
           <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"hello"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        &amp;nbsp;
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"world"</span>&gt;</span>World<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"block"</span>&gt;</span>
+          I am a block text.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"inline-block"</span>&gt;</span>
+            I am a inline-block text
+          <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"float-right"</span>&gt;</span>
+          I am float right text.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-absolute"</span>&gt;</span>
+          I am the position absolute text.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-fixed"</span>&gt;</span>
+          I am the position fixed text.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>
   }
-});
+}
+
+<span class="hljs-keyword">const</span> TourGuide = tourGuide(tour, cb, cancel)(Example);
 
 ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TourGuide</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
@@ -332,7 +371,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
   </a>
   
   <script src="common.js?nowrap"></script>
-  <script src="custom-buttons.js?nowrap"></script>
+  <script src="simple-higher-order-component.js?nowrap"></script>
 </body>
 
 </html>

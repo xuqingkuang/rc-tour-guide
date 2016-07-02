@@ -38,51 +38,51 @@ webpackJsonp([3],{
 	  }, {
 	    text: 'Tooltip 2',
 	    selector: '.position1',
-	    placement: 'top-left'
+	    placement: 'topLeft'
 	  }, {
 	    text: 'Tooltip 3',
 	    selector: '.position2',
-	    placement: 'top-center'
+	    placement: 'top'
 	  }, {
 	    text: 'Tooltip 4',
 	    selector: '.position3',
-	    placement: 'top-right'
+	    placement: 'topRight'
 	  }, {
 	    text: 'Tooltip 5',
 	    selector: '.position6',
-	    placement: 'right-top'
+	    placement: 'rightTop'
 	  }, {
 	    text: 'Tooltip 6',
 	    selector: '.position8',
-	    placement: 'right-middle'
+	    placement: 'right'
 	  }, {
 	    text: 'Tooltip 7',
 	    selector: '.position10',
-	    placement: 'right-bottom'
+	    placement: 'rightBottom'
 	  }, {
 	    text: 'Tooltip 8',
 	    selector: '.position13',
-	    placement: 'bottom-right'
+	    placement: 'bottomRight'
 	  }, {
 	    text: 'Tooltip 9',
 	    selector: '.position12',
-	    placement: 'bottom-center'
+	    placement: 'bottom'
 	  }, {
 	    text: 'Tooltip 10',
 	    selector: '.position11',
-	    placement: 'bottom-left'
+	    placement: 'bottomLeft'
 	  }, {
 	    text: 'Tooltip 11',
 	    selector: '.position9',
-	    placement: 'left-bottom'
+	    placement: 'leftBottom'
 	  }, {
 	    text: 'Tooltip 12',
 	    selector: '.position7',
-	    placement: 'left-middle'
+	    placement: 'left'
 	  }, {
 	    text: 'Tooltip 13',
 	    selector: '.position4',
-	    placement: 'left-top'
+	    placement: 'leftTop'
 	  }]
 	};
 	

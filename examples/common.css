@@ -53,14 +53,17 @@
   content: '';
   position: absolute;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-left {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-left,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.topLeft {
   bottom: -10px;
   border-top-color: white;
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-center {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-center,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.topCenter {
   bottom: -10px;
   left: 50%;
   border-top-color: white;
@@ -68,7 +71,8 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-right {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.top-right,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.topRight {
   bottom: -10px;
   right: 10px;
   border-top-color: white;
@@ -76,7 +80,8 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-top {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-top,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.rightTop {
   left: -10px;
   top: 10px;
   border-top-color: transparent;
@@ -84,7 +89,9 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-middle {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-middle,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.rightMiddle {
   left: -10px;
   top: 45%;
   border-top-color: transparent;
@@ -92,7 +99,8 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-bottom {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.right-bottom,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.rightBottom {
   left: -10px;
   bottom: 10px;
   border-top-color: transparent;
@@ -100,14 +108,17 @@
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-left {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-left,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottomLeft {
   top: -10px;
   border-top-color: transparent;
   border-right-color: transparent;
   border-bottom-color: white;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-center {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-center,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottomCenter {
   top: -10px;
   left: 50%;
   margin-left: -5px;
@@ -116,7 +127,8 @@
   border-bottom-color: white;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-right {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottom-right,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.bottomRight {
   top: -10px;
   right: 10px;
   margin-left: -5px;
@@ -125,7 +137,8 @@
   border-bottom-color: white;
   border-left-color: transparent;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-top {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-top,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.leftTop {
   right: -10px;
   top: 10px;
   border-top-color: transparent;
@@ -133,7 +146,9 @@
   border-bottom-color: transparent;
   border-left-color: white;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-middle {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-middle,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.leftMiddle {
   right: -10px;
   top: 45%;
   border-top-color: transparent;
@@ -141,7 +156,8 @@
   border-bottom-color: transparent;
   border-left-color: white;
 }
-.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-bottom {
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.left-bottom,
+.rc-tour-guide .rc-tour-tooltip .rc-tour-arrow.leftBottom {
   bottom: 10px;
   right: -10px;
   border-top-color: transparent;

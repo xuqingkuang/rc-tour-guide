@@ -1,14 +1,14 @@
-webpackJsonp([5],{
+webpackJsonp([6],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(182);
+	module.exports = __webpack_require__(183);
 
 
 /***/ },
 
-/***/ 182:
+/***/ 183:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23,10 +23,19 @@ webpackJsonp([5],{
 	
 	var _rcTourGuide = __webpack_require__(169);
 	
+	var _rcTourGuide2 = _interopRequireDefault(_rcTourGuide);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(176); // use jsx to render html, do not modify simple.html
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } // use jsx to render html, do not modify simple.html
+	
+	__webpack_require__(176);
 	__webpack_require__(177);
 	
 	var tour = {
@@ -70,14 +79,20 @@ webpackJsonp([5],{
 	  console.log('User has canceled the tour!');
 	};
 	
-	var TourGuide = _react2.default.createClass({
-	  displayName: 'TourGuide',
+	var Example = function (_Component) {
+	  _inherits(Example, _Component);
 	
-	  mixins: [(0, _rcTourGuide.tourGuideMixin)(tour, cb, cancel)],
-	  componentDidMount: function componentDidMount() {
+	  function Example() {
+	    _classCallCheck(this, Example);
+	
+	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	  }
+	
+	  Example.prototype.componentDidMount = function componentDidMount() {
 	    this.showTourGuide();
-	  },
-	  render: function render() {
+	  };
+	
+	  Example.prototype.render = function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -127,12 +142,16 @@ webpackJsonp([5],{
 	        'I am the position fixed text.'
 	      )
 	    );
-	  }
-	});
+	  };
+	
+	  return Example;
+	}(_react.Component);
+	
+	var TourGuide = (0, _rcTourGuide2.default)(tour, cb, cancel)(Example);
 	
 	_reactDom2.default.render(_react2.default.createElement(TourGuide, null), document.getElementById('__react-content'));
 
 /***/ }
 
 });
-//# sourceMappingURL=simple.js.map
+//# sourceMappingURL=simple-higher-order-component.js.map
