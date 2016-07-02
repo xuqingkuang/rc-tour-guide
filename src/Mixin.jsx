@@ -231,7 +231,7 @@ export default (options, done, cancel) => {
       });
     },
 
-    showTourGuide: function (evt, reset = false) {
+    showTourGuide: function (evt, reset = false, callback) {
       let currentIndex = this.state.currentIndex;
       if (this.state.currentIndex === this.options.steps.length) {
         currentIndex = this.options.startIndex
@@ -243,7 +243,7 @@ export default (options, done, cancel) => {
       this.setState({
         show: true,
         currentIndex: currentIndex,
-      });
+      }, callback);
     },
 
     hideTourGuide: function (evt, reset = false, callback) {
