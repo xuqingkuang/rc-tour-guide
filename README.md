@@ -1,18 +1,17 @@
 # rc-tour-guide
 ---
 
-React tour guide or introduction for user is first time using.
+Best React Tour Guide component for new user.
 
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version](http://img.shields.io/npm/v/rc-tour-guide.svg?style=flat-square)](http://npmjs.org/package/rc-tour-guide)
 [![Dependency Status](https://david-dm.org/xuqingkuang/rc-tour-guide.svg)](https://david-dm.org/xuqingkuang/rc-tour-guide)
 [![devDependency Status](https://david-dm.org/xuqingkuang/rc-tour-guide/dev-status.svg)](https://david-dm.org/xuqingkuang/rc-tour-guide#info=devDependencies)
-[![npm download][download-image]][download-url]
+[![npm download](https://img.shields.io/npm/dm/rc-tour-guide.svg?style=flat-square)](https://npmjs.org/package/rc-tour-guide)
 
-[npm-image]: http://img.shields.io/npm/v/rc-tour-guide.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-tour-guide
-[download-image]: https://img.shields.io/npm/dm/rc-tour-guide.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-tour-guide
+## Screen capture
+
+![Screen Capture](http://o8gb937mp.bkt.clouddn.com/github/rc-tour-guide.gif)
 
 ## Development
 
@@ -35,14 +34,16 @@ online example: http://xuqingkuang.github.io/rc-tour-guide/
 [![rc-tour-guide](https://nodei.co/npm/rc-tour-guide.png)](https://npmjs.org/package/rc-tour-guide)
 
 
-## Usage
+## Simple Usage
+
 
 ```js
-import React from 'react';
+// use jsx to render html, do not modify simple.html
+
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { tourGuideMixin } from 'rc-tour-guide';
+import tourGuide from 'rc-tour-guide';
 require('rc-tour-guide/assets/index.less');
-require('./style.less');
 
 const tour = {
   startIndex: 0,
@@ -50,82 +51,134 @@ const tour = {
   steps: [
     {
       text: 'This is the first step in the tour.',
-      selector: '.block',
-    },
-    {
-      text: 'This is the second step in the tour.',
-      selector: '.inline-block',
-      placement: 'right-bottom'
-    },
-    {
-      text: 'This is the third step in the tour.',
-      selector: '.float-right',
-      placement: 'left-middle',
-    },
-    {
-      text: 'This is the fourth step in the tour.',
-      selector: '.position-absolute',
-      placement: 'top-right',
+      selector: '.block'
     }
   ]
 };
 
-const cb = function() {
+const completed = function() {
   console.log('User has completed tour!');
 };
 
-const TourGuide = React.createClass({
-  mixins: [ tourGuideMixin(tour, cb) ],
-  componentDidMount: function() {
+const canceled = function() {
+  console.log('User has canceled the tour!');
+}
+
+class Example extends Component {
+
+  componentDidMount () {
     this.showTourGuide();
-  },
-  render: function() {
+  }
+
+  render () {
     return (
       <div>
         <div>
-          <button onClick={this.showTourGuide}>
-            Show Tour Guide
-          </button>
-          <button onClick={function(evt) { this.showTourGuide(evt, true) }.bind(this)}>
+          <button onClick={(evt) => { this.showTourGuide(evt, true) }}>
             Reset and Show Tour Guide
           </button>
         </div>
         <div className="block">
           I am a block text.
         </div>
-        <div>
-          <span className="inline-block">
-            I am a inline-block text
-          </span>
-        </div>
-        <div className="float-right">
-          I am float right text.
-        </div>
-        <div className="position-absolute">
-          I am the position absolute text.
-        </div>
       </div>
     )
   }
-});
+}
 
-ReactDOM.render(<TourGuide />, document.getElementById('__react-content'));
+const TourGuide = tourGuide(tour, completed, canceled)(Example);
+
+ReactDOM.render(<TourGuide />, document.getElementById('__react-content'));```
 ```
 
-## Test Case
+## Options and Defaults
+
+```js
+{
+  placement: 'bottom-left',           // Global tooltip appear placement
+  maskPadding: 6,                     // Mask border distance with target element
+  toolTipOffset: 3,                   // Tooltip distance with mask
+  startIndex: 0,                      // Default start tooltip index
+  scrollToSteps: true,                // When it enabled it will scroll to target
+  enableCloseButton: true,            // Global close button enabled
+  locale: {                           // Translations by default it's Chinese
+    close: '关闭',
+    previous: '上一个',
+    next: '下一个',
+    done: '完成',
+  },
+  classNames: {                       // Customize the related element class name
+    target: 'rc-tour-guide-target',
+    position: 'rc-tour-guide-relative',
+  }
+  steps: [
+    {
+      text: 'I am the text',          // Tooltip text
+      selector: '.tour-guide-target', // Target css selector
+      placement: 'bottom-left',       // Specific tooltip appear placement
+      maskPadding: 6,                 // Specific tooltip mask padding
+      toolTipOffset: 3,               // As same as global options
+      enableCloseButton: true,        // As same as global options
+      beCurrent: ($target) => {},     // When be current executor, $target is jquery object
+      bePrevious: ($target) => {},    // When be previous executor, $target is jquery object
+    }
+  ],
+}
 
 ```
-npm test
-npm run chrome-test
-```
 
-## Coverage
+## Methods
 
-```
-npm run coverage
-```
+All of the methods could be called in instance
 
-open coverage/ dir
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+        <th style="width: 120px;">Name</th>
+        <th style="width: 200px;">Arguments</th>
+        <th style="width: 200px">Response</th>
+        <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>setTourSteps</td>
+      <td>(steps, callback)</td>
+      <td></td>
+      <td>After Tour Guide initialized, reset the steps</td>
+    </tr>
+    <tr>
+      <td>getProgress</td>
+      <td></td>
+      <td>{index, total, percentageComplete, step}</td>
+      <td>Get current step progress</td>
+    </tr>
+    <tr>
+      <td>showTourGuide</td>
+      <td>(evt, reset = false, callback)</td>
+      <td></td>
+      <td>Show tour guide</td>
+    </tr>
+    <tr>
+      <td>hideTourGuide</td>
+      <td>(evt, reset = false, callback)</td>
+      <td></td>
+      <td>Hide tour guide</td>
+    </tr>
+    <tr>
+      <td>previousTooltip</td>
+      <td></td>
+      <td></td>
+      <td>Go to previous Tooltip</td>
+    </tr>
+    <tr>
+      <td>nextTooltip</td>
+      <td></td>
+      <td></td>
+      <td>Go to next Tooltip</td>
+    </tr>
+  </tbody>
+</table>
 
 ## License
 

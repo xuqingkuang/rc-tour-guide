@@ -53,6 +53,10 @@ const cancel = function() {
   console.log('User has canceled the tour!');
 }
 
+const callback = function() {
+  console.log('Show tour guide!')
+}
+
 class Example extends Component {
 
   componentDidMount () {
@@ -63,10 +67,10 @@ class Example extends Component {
     return (
       <div>
         <div>
-          <button onClick={this.showTourGuide}>
+          <button onClick={() => { this.showTourGuide() }}>
             Show Tour Guide
           </button>
-          <button onClick={function(evt) { this.showTourGuide(evt, true) }.bind(this)}>
+          <button onClick={(evt) => { this.showTourGuide(evt, true, callback) }}>
             Reset and Show Tour Guide
           </button>
         </div>
