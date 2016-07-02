@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple-higher-order-component.js - example - rc-tour-guide@0.0.16</title>
+  <title>simple-higher-order-component.js - example - rc-tour-guide@0.1.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-tour-guide@0.0.16</h1>
+      <h1>rc-tour-guide@0.1.0</h1>
 
       <p>Tour Guide component for react</p>
     </div>
@@ -319,6 +319,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has canceled the tour!'</span>);
 }
 
+<span class="hljs-keyword">const</span> callback = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Show tour guide!'</span>)
+}
+
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
   componentDidMount () {
@@ -329,10 +333,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.showTourGuide}</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{()</span> =&gt;</span> { this.showTourGuide() }}&gt;
             Show Tour Guide
           <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{function(evt)</span> { <span class="hljs-attribute">this.showTourGuide</span>(<span class="hljs-attribute">evt</span>, <span class="hljs-attribute">true</span>) }<span class="hljs-attribute">.bind</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{(evt)</span> =&gt;</span> { this.showTourGuide(evt, true, callback) }}&gt;
             Reset and Show Tour Guide
           <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>

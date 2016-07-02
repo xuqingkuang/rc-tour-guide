@@ -20471,6 +20471,10 @@
 	  value: true
 	});
 	
+	var _objectAssign = __webpack_require__(5);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
 	var _Mixin = __webpack_require__(171);
 	
 	var _Mixin2 = _interopRequireDefault(_Mixin);
@@ -20478,22 +20482,55 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// TODO: Higher order component implementation.
-	var HigherOrderComponent = function HigherOrderComponent(options, done) {
+	var tourGuide = function tourGuide(options, done) {
 	  return function (Component) {
+	    options.higherOrder = true; // Using for event bindding in Mixin.jsx
+	
 	    var m = (0, _Mixin2.default)(options, done);
-	    var descs = Object.getOwnPropertyDescriptor(m);
-	    for (var key in descs) {
-	      if (!(key in Component.prototype)) {
-	        Object.defineProperty(Component.prototype, key, descs[key]);
+	    var getInitialState = m.getInitialState;
+	
+	    // mixin getInitialState
+	    m.componentWillMount = function () {
+	      var state = this.state || {};
+	      state = (0, _objectAssign2.default)(state, getInitialState.call(this));
+	      this.state = state;
+	    };
+	    delete m.getInitialState;
+	
+	    // Other mixin keys.
+	    Object.keys(m).forEach(function (key) {
+	      var left = Component.prototype[key],
+	          right = m[key];
+	      if (left === undefined && right === undefined) {
+	        return;
 	      }
-	    }
+	      if (typeof right === 'function') {
+	        if (typeof left === 'function') {
+	          left.bind(this);
+	        }
+	        right.bind(this);
+	        Component.prototype[key] = function () {
+	          if (right && !left) {
+	            return right.apply(this, arguments);
+	          }
+	          if (right) {
+	            right.apply(this, arguments);
+	          }
+	          if (left) {
+	            left.apply(this, arguments);
+	          }
+	        };
+	      } else {
+	        Component.prototype[key] = right;
+	      }
+	    });
 	    return Component;
 	  };
 	};
 	
-	HigherOrderComponent.tourGuideMixin = _Mixin2.default;
+	tourGuide.tourGuideMixin = _Mixin2.default;
 	
-	exports.default = HigherOrderComponent;
+	exports.default = tourGuide;
 	module.exports = exports['default'];
 
 /***/ },
@@ -20559,7 +20596,7 @@
 	
 	    getInitialState: function getInitialState() {
 	      return {
-	        currentIndex: this.options.startIndex,
+	        currentIndex: options.startIndex || this.options.startIndex,
 	        show: false,
 	        xPos: -1000,
 	        yPos: -1000,
@@ -20760,6 +20797,7 @@
 	
 	    showTourGuide: function showTourGuide(evt) {
 	      var reset = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+	      var callback = arguments[2];
 	
 	      var currentIndex = this.state.currentIndex;
 	      if (this.state.currentIndex === this.options.steps.length) {
@@ -20772,7 +20810,7 @@
 	      this.setState({
 	        show: true,
 	        currentIndex: currentIndex
-	      });
+	      }, callback);
 	    },
 	
 	    hideTourGuide: function hideTourGuide(evt) {
@@ -20811,6 +20849,7 @@
 	    },
 	
 	    getStepOption: function getStepOption(step, name, type) {
+	      // TODO: option type validation.
 	      if (typeof step[name] !== 'undefined') {
 	        return step[name];
 	      }
@@ -20886,14 +20925,23 @@
 	    },
 	
 	    renderCurrentStep: function renderCurrentStep() {
-	      var currentStep = this.options.steps[this.state.currentIndex];
-	      var maxStepIndex = this.options.steps.length - 1;
-	      var $target = currentStep && currentStep.selector ? (0, _jquery2.default)(currentStep.selector) : null;
-	      var cssPosition = $target ? $target.css('position') : null;
-	      var maskPadding = this.getStepOption(currentStep, 'maskPadding');
-	      var element = void 0;
+	      var _this2 = this;
 	
+	      var currentStep = this.options.steps[this.state.currentIndex];
+	      var $target = currentStep && currentStep.selector ? (0, _jquery2.default)(currentStep.selector) : null;
+	      var element = void 0;
 	      if (this.state.show && $target && $target.length) {
+	        var cssPosition = $target ? $target.css('position') : null;
+	        var maskPadding = this.getStepOption(currentStep, 'maskPadding');
+	        var maxStepIndex = this.options.steps.length - 1;
+	
+	        var bindHandler = function bindHandler(handler) {
+	          if (_this2.options.higherOrder) {
+	            return handler.bind(_this2);
+	          }
+	          return handler;
+	        };
+	
 	        element = _react2.default.createElement(_Tooltip2.default, {
 	          cssPosition: cssPosition,
 	          maskPadding: maskPadding,
@@ -20908,11 +20956,11 @@
 	          extraButtons: currentStep.extraButtons,
 	          isFirst: this.state.currentIndex === 0,
 	          isLast: this.state.currentIndex === maxStepIndex,
-	          hideTourGuide: function hideTourGuide(evt) {
-	            this.handleCancel(evt).bind(this);
-	          },
-	          onPrevious: this.previousTooltip,
-	          onNext: this.nextTooltip,
+	          hideTourGuide: bindHandler(function (evt) {
+	            this.handleCancel(evt);
+	          }),
+	          onPrevious: bindHandler(this.previousTooltip),
+	          onNext: bindHandler(this.nextTooltip),
 	          onDone: function (evt) {
 	            this.handleDone(evt);
 	          }.bind(this),

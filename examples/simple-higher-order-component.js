@@ -79,6 +79,10 @@ webpackJsonp([6],{
 	  console.log('User has canceled the tour!');
 	};
 	
+	var callback = function callback() {
+	  console.log('Show tour guide!');
+	};
+	
 	var Example = function (_Component) {
 	  _inherits(Example, _Component);
 	
@@ -93,6 +97,8 @@ webpackJsonp([6],{
 	  };
 	
 	  Example.prototype.render = function render() {
+	    var _this2 = this;
+	
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -101,14 +107,16 @@ webpackJsonp([6],{
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: this.showTourGuide },
+	          { onClick: function onClick() {
+	              _this2.showTourGuide();
+	            } },
 	          'Show Tour Guide'
 	        ),
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: function (evt) {
-	              this.showTourGuide(evt, true);
-	            }.bind(this) },
+	          { onClick: function onClick(evt) {
+	              _this2.showTourGuide(evt, true, callback);
+	            } },
 	          'Reset and Show Tour Guide'
 	        )
 	      ),

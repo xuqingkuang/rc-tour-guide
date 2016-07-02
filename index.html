@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-tour-guide@0.0.16 - Tour Guide component for react</title>
+  <title>rc-tour-guide@0.1.0 - Tour Guide component for react</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-tour-guide@0.0.16</h1>
+  <h1>rc-tour-guide@0.1.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -765,20 +765,22 @@
   <h3>README.md</h3>
   <div class="markdown-body">
     <h1>rc-tour-guide<a id="user-content-rc-tour-guide" name="rc-tour-guide" class="anchor" aria-hidden="true" href="#rc-tour-guide"><span class="octicon octicon-link"></span></a></h1><hr>
-<p>React tour guide or introduction for user is first time using.</p>
+<p>Best React Tour Guide component for new user.</p>
 <p><a href="http://npmjs.org/package/rc-tour-guide" title="null"><img src="http://img.shields.io/npm/v/rc-tour-guide.svg?style=flat-square" alt="NPM version"></a>
 <a href="https://david-dm.org/xuqingkuang/rc-tour-guide" title="null"><img src="https://david-dm.org/xuqingkuang/rc-tour-guide.svg" alt="Dependency Status"></a>
 <a href="https://david-dm.org/xuqingkuang/rc-tour-guide#info=devDependencies" title="null"><img src="https://david-dm.org/xuqingkuang/rc-tour-guide/dev-status.svg" alt="devDependency Status"></a>
 <a href="https://npmjs.org/package/rc-tour-guide" title="null"><img src="https://img.shields.io/npm/dm/rc-tour-guide.svg?style=flat-square" alt="npm download"></a></p>
+<h2>Screen capture<a id="user-content-screen-capture" name="screen-capture" class="anchor" aria-hidden="true" href="#screen-capture"><span class="octicon octicon-link"></span></a></h2><p><img src="http://o8gb937mp.bkt.clouddn.com/github/rc-tour-guide.gif" alt="Screen Capture"></p>
 <h2>Development<a id="user-content-development" name="development" class="anchor" aria-hidden="true" href="#development"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="undefined">npm install
 npm start</code></pre></div><h2>Example<a id="user-content-example" name="example" class="anchor" aria-hidden="true" href="#example"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8000/examples/" title="null">http://localhost:8000/examples/</a></p>
 <p>online example: <a href="http://xuqingkuang.github.io/rc-tour-guide/" title="null">http://xuqingkuang.github.io/rc-tour-guide/</a></p>
 <h2>install<a id="user-content-install" name="install" class="anchor" aria-hidden="true" href="#install"><span class="octicon octicon-link"></span></a></h2><p><a href="https://npmjs.org/package/rc-tour-guide" title="null"><img src="https://nodei.co/npm/rc-tour-guide.png" alt="rc-tour-guide"></a></p>
-<h2>Usage<a id="user-content-usage" name="usage" class="anchor" aria-hidden="true" href="#usage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<h2>Simple Usage<a id="user-content-simple-usage" name="simple-usage" class="anchor" aria-hidden="true" href="#simple-usage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="js"><span class="hljs-comment">// use jsx to render html, do not modify simple.html</span>
+
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> { tourGuideMixin } <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tour-guide'</span>;
+<span class="hljs-keyword">import</span> tourGuide <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-tour-guide'</span>;
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-tour-guide/assets/index.less'</span>);
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'./style.less'</span>);
 
 <span class="hljs-keyword">const</span> tour = {
   startIndex: <span class="hljs-number">0</span>,
@@ -786,67 +788,126 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
   steps: [
     {
       text: <span class="hljs-string">'This is the first step in the tour.'</span>,
-      selector: <span class="hljs-string">'.block'</span>,
-    },
-    {
-      text: <span class="hljs-string">'This is the second step in the tour.'</span>,
-      selector: <span class="hljs-string">'.inline-block'</span>,
-      placement: <span class="hljs-string">'right-bottom'</span>
-    },
-    {
-      text: <span class="hljs-string">'This is the third step in the tour.'</span>,
-      selector: <span class="hljs-string">'.float-right'</span>,
-      placement: <span class="hljs-string">'left-middle'</span>,
-    },
-    {
-      text: <span class="hljs-string">'This is the fourth step in the tour.'</span>,
-      selector: <span class="hljs-string">'.position-absolute'</span>,
-      placement: <span class="hljs-string">'top-right'</span>,
+      selector: <span class="hljs-string">'.block'</span>
     }
   ]
 };
 
-<span class="hljs-keyword">const</span> cb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">const</span> completed = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has completed tour!'</span>);
 };
 
-<span class="hljs-keyword">const</span> TourGuide = React.createClass({
-  mixins: [ tourGuideMixin(tour, cb) ],
-  componentDidMount: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">const</span> canceled = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User has canceled the tour!'</span>);
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  componentDidMount () {
     <span class="hljs-keyword">this</span>.showTourGuide();
-  },
-  render: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  }
+
+  render () {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.showTourGuide}</span>&gt;</span>
-            Show Tour Guide
-          <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{function(evt)</span> { <span class="hljs-attribute">this.showTourGuide</span>(<span class="hljs-attribute">evt</span>, <span class="hljs-attribute">true</span>) }<span class="hljs-attribute">.bind</span>(<span class="hljs-attribute">this</span>)}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{(evt)</span> =&gt;</span> { this.showTourGuide(evt, true) }}&gt;
             Reset and Show Tour Guide
           <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"block"</span>&gt;</span>
           I am a block text.
         <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"inline-block"</span>&gt;</span>
-            I am a inline-block text
-          <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"float-right"</span>&gt;</span>
-          I am float right text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"position-absolute"</span>&gt;</span>
-          I am the position absolute text.
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>
   }
-});
+}
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TourGuide</span> /&gt;</span>, document.getElementById('__react-content'));</span></code></pre></div><h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="undefined">npm test
-npm run chrome-test</code></pre></div><h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="undefined">npm run coverage</code></pre></div><p>open coverage/ dir</p>
+<span class="hljs-keyword">const</span> TourGuide = tourGuide(tour, completed, canceled)(Example);
+
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TourGuide</span> /&gt;</span>, document.getElementById('__react-content'));</span></code></pre></div><div class="highlight"><pre><code language="undefined">
+## Options and Defaults
+
+```js
+{
+  placement: 'bottom-left',           // Global tooltip appear placement
+  maskPadding: 6,                     // Mask border distance with target element
+  toolTipOffset: 3,                   // Tooltip distance with mask
+  startIndex: 0,                      // Default start tooltip index
+  scrollToSteps: true,                // When it enabled it will scroll to target
+  enableCloseButton: true,            // Global close button enabled
+  locale: {                           // Translations by default it's Chinese
+    close: '关闭',
+    previous: '上一个',
+    next: '下一个',
+    done: '完成',
+  },
+  classNames: {                       // Customize the related element class name
+    target: 'rc-tour-guide-target',
+    position: 'rc-tour-guide-relative',
+  }
+  steps: [
+    {
+      text: 'I am the text',          // Tooltip text
+      selector: '.tour-guide-target', // Target css selector
+      placement: 'bottom-left',       // Specific tooltip appear placement
+      maskPadding: 6,                 // Specific tooltip mask padding
+      toolTipOffset: 3,               // As same as global options
+      enableCloseButton: true,        // As same as global options
+      beCurrent: ($target) =&gt; {},     // When be current executor, $target is jquery object
+      bePrevious: ($target) =&gt; {},    // When be previous executor, $target is jquery object
+    }
+  ],
+}</code></pre></div><h2>Methods<a id="user-content-methods" name="methods" class="anchor" aria-hidden="true" href="#methods"><span class="octicon octicon-link"></span></a></h2><p>All of the methods could be called in instance</p>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+        <th style="width: 120px;">Name</th>
+        <th style="width: 200px;">Arguments</th>
+        <th style="width: 200px">Response</th>
+        <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>setTourSteps</td>
+      <td>(steps, callback)</td>
+      <td></td>
+      <td>After Tour Guide initialized, reset the steps</td>
+    </tr>
+    <tr>
+      <td>getProgress</td>
+      <td></td>
+      <td>{index, total, percentageComplete, step}</td>
+      <td>Get current step progress</td>
+    </tr>
+    <tr>
+      <td>showTourGuide</td>
+      <td>(evt, reset = false, callback)</td>
+      <td></td>
+      <td>Show tour guide</td>
+    </tr>
+    <tr>
+      <td>hideTourGuide</td>
+      <td>(evt, reset = false, callback)</td>
+      <td></td>
+      <td>Hide tour guide</td>
+    </tr>
+    <tr>
+      <td>previousTooltip</td>
+      <td></td>
+      <td></td>
+      <td>Go to previous Tooltip</td>
+    </tr>
+    <tr>
+      <td>nextTooltip</td>
+      <td></td>
+      <td></td>
+      <td>Go to next Tooltip</td>
+    </tr>
+  </tbody>
+</table>
+
 <h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-tour-guide is released under the MIT license.</p>
 
   </div>
