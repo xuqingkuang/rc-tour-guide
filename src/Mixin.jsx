@@ -32,7 +32,7 @@ export default (options, done, cancel) => {
 
     getInitialState: function () {
       return {
-        currentIndex: this.options.startIndex,
+        currentIndex: options.startIndex || this.options.startIndex,
         show: false,
         xPos: -1000,
         yPos: -1000,
@@ -279,6 +279,7 @@ export default (options, done, cancel) => {
     },
 
     getStepOption: function(step, name, type) {
+      // TODO: option type validation.
       if (typeof step[name] !== 'undefined') {
         return step[name]
       }
@@ -333,7 +334,7 @@ export default (options, done, cancel) => {
       }
     },
 
-    scrollToNextStep: function () {
+    scrollToNextStep: function() {
       const $next = $('.rc-tour-guide-indicator');
 
       if ( $next && $next.length && this.options.scrollToSteps ) {
@@ -343,23 +344,30 @@ export default (options, done, cancel) => {
       }
     },
 
-    handleDone: function (evt) {
+    handleDone: function(evt) {
       this.hideTourGuide(evt, false, done);
     },
 
-    handleCancel: function (evt) {
+    handleCancel: function(evt) {
       this.hideTourGuide(evt, false, cancel);
     },
 
     renderCurrentStep: function () {
       const currentStep = this.options.steps[this.state.currentIndex];
-      const maxStepIndex = this.options.steps.length - 1;
       const $target = currentStep && currentStep.selector ? $(currentStep.selector) : null;
-      const cssPosition = $target ? $target.css('position') : null;
-      const maskPadding = this.getStepOption(currentStep, 'maskPadding');
       let element;
-
       if ( this.state.show && $target && $target.length) {
+        const cssPosition = $target ? $target.css('position') : null;
+        const maskPadding = this.getStepOption(currentStep, 'maskPadding');
+        const maxStepIndex = this.options.steps.length - 1;
+
+        const bindHandler = (handler) => {
+          if (this.options.higherOrder) {
+            return handler.bind(this);
+          }
+          return handler
+        }
+
         element = (
           <Tooltip
             cssPosition={ cssPosition }
@@ -375,9 +383,9 @@ export default (options, done, cancel) => {
             extraButtons = { currentStep.extraButtons }
             isFirst={ this.state.currentIndex === 0 }
             isLast={ this.state.currentIndex === maxStepIndex }
-            hideTourGuide={ function(evt) { this.handleCancel(evt).bind(this); } }
-            onPrevious={ this.previousTooltip }
-            onNext={ this.nextTooltip }
+            hideTourGuide={ bindHandler(function(evt) { this.handleCancel(evt) }) }
+            onPrevious={ bindHandler(this.previousTooltip) }
+            onNext={ bindHandler(this.nextTooltip) }
             onDone={ function(evt) { this.handleDone(evt); }.bind(this) }
             onClose={ function(evt) { this.handleCancel(evt); }.bind(this) }
             onCancel={ function(evt) { this.handleCancel(evt); }.bind(this) }
